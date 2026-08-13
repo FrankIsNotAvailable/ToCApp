@@ -19,7 +19,6 @@ const config = {
  		}),
 		prerender: {
 			handleHttpError: 'warn',
-			handleUnseenRoutes: 'warn'
 		},
 		alias: {
 			$components: './src/components',
