@@ -21,3 +21,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+.vscode/
+.vscode/*
+!.vscode/settings.json # (Optional: keep only if your team shares workspace settings)
+!.vscode/tasks.json    # (Optional: keep only if your team shares build tasks)
