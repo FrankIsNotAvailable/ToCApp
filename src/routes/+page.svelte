@@ -1,7 +1,9 @@
 <script>
-	import SayHello from '$components/SayHello.svelte';
+	import Sayhello from '$components/SayHello.svelte';
+	import NavBar from '$lib/navBar.svelte'
 </script>
 
+<NavBar />
 <div class="mx-auto my-auto">
-	<SayHello />
+	<Sayhello />
 </div>
