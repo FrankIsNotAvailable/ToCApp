@@ -11,3 +11,11 @@
 	personalTitle='Personal Information Entry'
 	/>
 </div>
+
+<!-- <style>
+  :global(html),
+  :global(body) {
+    background-color: #c6dfffff;
+  }
+  turn this thing on in order to debug components.
+</style> -->

@@ -12,7 +12,8 @@
 
 <div class='personalInformation w-[60%] px-[3.5rem] py-[3rem] rounded-3xl
             shadow-[0px_4px_38px_0px_rgba(0,0,0,0.25)] bg-white/35
-            font-[family-name:var(--inter-font)] text-[1rem] font-semibold'>
+            font-[family-name:var(--inter-font)] text-[1rem] font-semibold
+            border border-white/35 backdrop-blur-[5px]'>
     <div class='text-[3rem] pb-[2rem]'>
     {personalTitle}
     </div>
@@ -66,10 +67,12 @@
 
     <div class='flex justify-end border-t my-[1rem] pt-[1rem] gap-[1rem]
                 border-white'>
-        <button class='border rounded-lg px-[1rem] py-[0.5rem] bg-white
-                        text-black'>Cancel</button>
-        <button class='relative border rounded-lg px-[1rem] py-[0.5rem]
-                        pl-[2.5rem] bg-black text-white'>
+        <button class='border border-white rounded-lg px-[1rem] py-[0.5rem]
+                        bg-white text-black
+                        shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'>Cancel</button>
+        <button class='relative border border-black rounded-lg px-[1rem] 
+                        py-[0.5rem] pl-[2.5rem] bg-black text-white
+                        shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'>
             <img src={savePic} alt='Save logo' 
             class="absolute left-[0.75rem] top-[0.65rem] w-[1.25rem] h-[1.25rem]
                     pointer-events-none"/>
