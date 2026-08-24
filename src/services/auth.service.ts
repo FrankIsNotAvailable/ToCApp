@@ -4,13 +4,6 @@ import { userStore} from '$stores/user.store';
 import type { AuthResponse } from '$types/api.type';
 
 export class AuthService {
-	static async getGoogleAuthUrl(redirectUri: string): Promise<string> {
-        const response = await ApiService.get<{ url: string }>('/auth/google-url/', {
-            params: { redirect_uri: redirectUri }
-        });
-        return response.data.url;
-    }
-
     static async googleLogin(code: string, redirectUri: string): Promise<void> {
         const response = await ApiService.post<{ access: string }>('/auth/login/', {
             provider: 'google',
@@ -26,7 +19,7 @@ export class AuthService {
 
 	static async refreshAccessToken(): Promise<string> {
 		const response = await ApiService.get<AuthResponse>('/auth/refresh', { withCredentials: true });
-		const accessToken = response.data.accessToken;
+		const accessToken = response.data.at;
 		authStore.setAccessToken(accessToken);
 		return accessToken;
 	}
