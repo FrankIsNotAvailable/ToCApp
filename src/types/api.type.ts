@@ -1,5 +1,5 @@
 export interface AuthResponse {
-	accessToken: string;
+	at: string;
 }
 
 export interface ApiError {

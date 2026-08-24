@@ -1,49 +1,37 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { clearAllSecureStorage } from '$lib/storage-security';
-import { getCookie, deleteCookie } from '$lib/cookie';
-
-// Domain for cookie deletion — must match the domain used by the API when setting cookies.
-// Empty string in development (cookies are host-scoped),  real domain on staging/production.
-const COOKIE_DOMAIN = import.meta.env.VITE_COOKIE_DOMAIN || '';
 
 interface AuthState {
-	accessToken: string | null;
+    accessToken: string | null;
 }
 
 function createAuthStore() {
-	const initialToken = getCookie('at');
+    // Access token starts in memory as null on fresh page reloads.
+    // Call your backend /refresh endpoint on app launch to populate it.
+    const { subscribe, set, update } = writable<AuthState>({
+        accessToken: null
+    });
 
-	const { subscribe, set, update } = writable<AuthState>({
-		accessToken: initialToken
-	});
-
-	return {
-		subscribe,
-		setAccessToken: (token: string | null) => {
-			update((state) => ({ ...state, accessToken: token }));
-		},
-		clearAuth: () => {
-			set({ accessToken: null });
-			deleteCookie('at', COOKIE_DOMAIN || undefined);
-			clearAllSecureStorage();
-		},
-		logout: () => {
-			set({ accessToken: null });
-			deleteCookie('at', COOKIE_DOMAIN || undefined);
-			clearAllSecureStorage();
-		},
-		getAccessToken: (): string | null => {
-			let token: string | null = null;
-			subscribe((state) => {
-				token = state.accessToken;
-			})();
-			return token;
-		},
-		isAuthenticated: (): boolean => {
-			return !!getCookie('at');
-		}
-	};
+    return {
+        subscribe,
+        setAccessToken: (token: string | null) => {
+            update((state) => ({ ...state, accessToken: token }));
+        },
+        clearAuth: () => {
+            set({ accessToken: null });
+            clearAllSecureStorage();
+        },
+        logout: () => {
+            set({ accessToken: null });
+            clearAllSecureStorage();
+        },
+        getAccessToken: (): string | null => {
+            return get(authStore).accessToken;
+        },
+        isAuthenticated: (): boolean => {
+            return !!get(authStore).accessToken;
+        }
+    };
 }
 
 export const authStore = createAuthStore();
-
