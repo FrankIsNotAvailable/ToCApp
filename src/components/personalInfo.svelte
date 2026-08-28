@@ -1,5 +1,5 @@
 <script>
-    import ShortInput from "./ShortInput.svelte";
+    import ShortInput from './ShortInput.svelte';
     import creditCardPic from '$lib/assets/creditcard.svg';
     import mailPic from '$lib/assets/email.svg';
     import phonePic from '$lib/assets/phone.svg';

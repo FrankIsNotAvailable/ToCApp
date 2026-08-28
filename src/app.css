@@ -9,6 +9,7 @@
   --font-main: 'Prompt', sans-serif;
   --font-masked-data: 'Iosevka Charon', monospace;
 }
+
 :root {
     --navbar-background: #f7f1e4;
     --main-background: #e4e1dc;
@@ -18,4 +19,27 @@
     --textarea-large: 6rem;
     --svg-norm: calc(4 / 9 * 100%);
     --svg-large: calc(1 / 5 * 100%);
+}
+
+.background {
+		position: fixed;
+		inset: 0;
+		background-image: url('/src/lib/assets/mainbackground.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+		opacity: 40%;
+		mix-blend-mode: luminosity;
+		z-index: -1;
+}
+
+.page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    min-height: 0;
+    flex: 1;
+	  overflow-y: auto;
 }

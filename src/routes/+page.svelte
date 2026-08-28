@@ -1,24 +1,21 @@
 <script>
-
 	import HomeDataAvaliable from '$components/HomeDataAvaliable.svelte';
 	import Sayhello from '$components/SayHello.svelte';
 	import NavBar from '$components/NavBar.svelte';
 	import PersonalInfo from '$components/PersonalInfo.svelte';
 </script>
 
-<NavBar />
-<HomeDataAvaliable />
-<div class="flex justify-center my-auto">
-	<!-- <Sayhello /> -->
-	<PersonalInfo 
-	personalTitle='Personal Information Entry'
-	/>
-</div>
+<div class="background"></div>
 
-<!-- <style>
-  :global(html),
-  :global(body) {
-    background-color: #c6dfffff;
-  }
-  turn this thing on in order to debug components.
-</style> -->
+<div class="page">
+	<header>
+		<NavBar />
+	</header>
+
+	<div class="content">
+		<div class="min-h-full flex items-center justify-center py-[1rem]">
+			<!-- <HomeDataAvaliable /> -->
+			<PersonalInfo personalTitle="Personal Information Entry" />
+		</div>
+	</div>
+</div>
