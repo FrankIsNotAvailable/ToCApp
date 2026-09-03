@@ -5,6 +5,6 @@ export interface RawData {
     user: User;
     enc_data: string;
     createdAt: string;
-    updatedAt: string;
+    updatedAt?: string;
     status: string;
 }
