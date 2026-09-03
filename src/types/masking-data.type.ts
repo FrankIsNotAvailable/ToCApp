@@ -1,17 +1,12 @@
 import type { User } from '$types/user.type';
-import type { CreditCard } from '$types/credit-card.type';
 import type { Meta } from '$types/meta-data.type';
 
 export interface MaskingData {
   id: string;
   user: User;
-  creditCard: CreditCard;
-  maskedEmail: string;
-  maskedPhoneNumber: string;
-  maskedAddress: string;
-  maskedDOB: string;
+  maskedData: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   status: string;
 }
 
@@ -22,10 +17,7 @@ export interface MaskingDataQueryParams {
 }
 
 export interface UpdateMaskingDataPayload {
-  email?: string;
-  phoneNumber?: string;
-  address?: string;
-  dob?: string;
+  data: string;
 }
 
 export interface MaskingDataResponse {
