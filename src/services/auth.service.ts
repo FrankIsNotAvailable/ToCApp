@@ -1,7 +1,7 @@
 import ApiService from './api.service';
 import { authStore } from '$stores/auth.store';
 import { userStore} from '$stores/user.store';
-import type { AuthResponse } from '$types/api.type';
+import type { RefreshTokenResponse } from '$types/api.type';
 
 export class AuthService {
     static async googleLogin(code: string, redirectUri: string): Promise<void> {
@@ -18,7 +18,7 @@ export class AuthService {
     }
 
 	static async refreshAccessToken(): Promise<string> {
-		const response = await ApiService.get<AuthResponse>('/auth/refresh', { withCredentials: true });
+		const response = await ApiService.get<RefreshTokenResponse>('/auth/refresh', { withCredentials: true });
 		const accessToken = response.data.at;
 		authStore.setAccessToken(accessToken);
 		return accessToken;
