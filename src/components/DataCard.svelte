@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { MaskedData } from '$types/MaskedData';
+	import type { MaskingData } from '$types/masking-data.type';
 	import folderImg from '$lib/assets/foderimg.png';
 	import removeImg from '$lib/assets/remove.png';
 
@@ -9,14 +9,15 @@
 		onDelete,
 		height = 222
 	}: {
-		data: MaskedData;
+		data: MaskingData;
 		onEdit?: (id: string) => void;
 		onDelete?: (id: string) => void;
 		height?: number;
 	} = $props();
 
-	function formatDate(date: Date) {
-		return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+	function formatDate(date: string) {
+		const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(`${date}T00:00:00`) : new Date(date);
+ 		return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 	}
 </script>
 
@@ -31,14 +32,14 @@
 		<div class="h-16 w-px shrink-0 bg-black/25"></div>
 		<div class="flex flex-col gap-1">
 			<p class="font-masked-data text-[28px] leading-[1.2] font-normal text-black">
-				Data: {data.fields.join(', ')}
+				Data: {data.maskedData}
 			</p>
 			<div class="flex flex-col">
 				<p class="font-masked-data text-[18px] leading-[1.2] font-normal text-[#767676]">
 					created: {formatDate(data.createdAt)}
 				</p>
 				<p class="font-masked-data text-[18px] leading-[1.2] font-normal text-[#767676]">
-					edited: {data.editedAt ? formatDate(data.editedAt) : '-'}
+					edited: {data.updatedAt ? formatDate(data.updatedAt) : '-'}
 				</p>
 			</div>
 		</div>

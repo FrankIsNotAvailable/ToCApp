@@ -1,7 +1,3 @@
-export interface AuthResponse {
-	accessToken: string;
-}
-
 export interface ApiError {
 	message: string;
 	statusCode: number;
@@ -9,5 +5,5 @@ export interface ApiError {
 }
 
 export interface RefreshTokenResponse {
-	access_token: string;
+	at: string;
 }

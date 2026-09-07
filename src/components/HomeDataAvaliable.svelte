@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import DataCard from './DataCard.svelte';
-	import type { MaskedData } from '$types/MaskedData';
+	import type { MaskingData } from '$types/masking-data.type';
 	import bgImage from '$lib/assets/mainbackground.png';
 	import addButtonImg from '$lib/assets/addbuttondata.png';
 
-	const CARD_HEIGHT = 110; // fixed for every card, regardless of item count
-	const PAGE_SIZE = 3; // number of items per page
+	const CARD_HEIGHT = 110;
+	const PAGE_SIZE = 10;
 
 	let navbarHeight = $state(0);
 
@@ -21,24 +21,42 @@
 		return () => window.removeEventListener('resize', updateNavbarHeight);
 	});
 
-	let items: MaskedData[] = $state([
+	let items: MaskingData[] = $state([
 		{
 			id: '1',
-			fields: ['Credit Card Number', 'Address'],
-			createdAt: new Date('2026-08-20'),
-			editedAt: null
+			user: {
+				id: '1',
+				username: 'John Doe',
+				email: 'john.doe@example.com'
+			},
+			maskedData: '**** **** **** 1234',
+			createdAt: '2026-08-20',
+			status: 'active'
 		},
 		{
+			
 			id: '2',
-			fields: ['Mail'],
-			createdAt: new Date('2026-08-15'),
-			editedAt: new Date('2026-08-19')
+			user: {
+				id: '2',
+				username: 'Jane Smith',
+				email: 'jane.smith@example.com'
+			},
+			maskedData: '**** **** **** 5678',
+			createdAt: '2026-08-15',
+			updatedAt: '2026-08-19',
+			status: 'active'
 		},
 		{
 			id: '3',
-			fields: ['Telephone', 'Address'],
-			createdAt: new Date('2026-07-27'),
-			editedAt: new Date('2026-08-08')
+			user: {
+				id: '3',
+				username: 'Bob Johnson',
+				email: 'bob.johnson@example.com'
+			},
+			maskedData: '**** **** **** 9012',
+			createdAt: '2026-07-27',
+			updatedAt: '2026-08-08',
+			status: 'active'
 		}
 	]);
 
