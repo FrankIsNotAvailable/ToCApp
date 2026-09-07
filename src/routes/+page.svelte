@@ -1,18 +1,11 @@
 <script>
-
 	import HomeDataAvaliable from '$components/HomeDataAvaliable.svelte';
 	import Sayhello from '$components/SayHello.svelte';
 	import NavBar from '$components/NavBar.svelte';
-	import PersonalInfo from '$components/PersonalInfo.svelte';
 </script>
-
 <NavBar />
-<HomeDataAvaliable />
 <div class="flex justify-center my-auto">
-	<!-- <Sayhello /> -->
-	<PersonalInfo 
-	personalTitle='Personal Information Entry'
-	/>
+	<HomeDataAvaliable />
 </div>
 
 <!-- <style>

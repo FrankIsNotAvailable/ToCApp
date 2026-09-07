@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import DataCard from './DataCard.svelte';
 	import type { MaskedData } from '$types/MaskedData';
-	import bgImage from '$lib/assets/c71142e3f4c96fe87cc9c63e3365df4dec3e1160.png';
+	import bgImage from '$lib/assets/mainbackground.png';
 	import addButtonImg from '$lib/assets/addbuttondata.png';
 
 	const CARD_HEIGHT = 110; // fixed for every card, regardless of item count
