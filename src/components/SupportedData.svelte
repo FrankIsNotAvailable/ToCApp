@@ -18,11 +18,11 @@
     </div>
 
     <div class='text-[1.125rem] text-[#656565] text-center leading-loose
-                pt-[1rem] h-[20%]'>
+                pt-[1rem] h-[13%]'>
         {description}
     </div>
 
-    <div class='text-[1.5rem] pt-[2rem] h-[20%]'>
+    <div class='text-[1.5rem] pt-[2rem] h-[27%]'>
         Pattern: {pattern}
     </div>
 </div>

@@ -24,6 +24,24 @@
 	let progress = 0;
     let arrowProgress = 0;
     let currentNumber = 1;
+    let cursorX = 0;
+    let cursorY = 0;
+    let cursorVisible = false;
+
+    function handleCursorMove(event) {
+        const rect = event.currentTarget.getBoundingClientRect();
+
+        cursorX = event.clientX - rect.left;
+        cursorY = event.clientY - rect.top;
+    }
+
+    function handleCursorEnter() {
+        cursorVisible = true;
+    }
+
+    function handleCursorLeave() {
+        cursorVisible = false;
+    }
 
 	function handleScroll() {
 		const container = scrollContainer;
@@ -54,36 +72,36 @@
             picture: CreditCard,
             pictureAlt: 'credit card picture',
             title: 'Credit Card Number',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            pattern: 'xxxx-xxxx-xxxx-3456'
+            description: 'A 16-digit number used to identify a credit card.',
+            pattern: '1234-5678-9101-1121'
         },
         {
             picture: Mail,
             pictureAlt: 'mail picture',
             title: 'E-mail',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            pattern: 's*******d@company.com'
+            description: 'A valid email address containing a username and domain.',
+            pattern: 'someone@domain.com'
         },
         {
             picture: Phone,
             pictureAlt: 'phone picture',
             title: 'Phone Number',
-            description: 'Lorem ipsum dolor sit ameagna aliqua.',
-            pattern: 'xxx-xxx-7867'
+            description: 'A phone number containing a country code and subscriber number.',
+            pattern: '012-345-6789'
         },
         {
             picture: Calendar,
             pictureAlt: 'calendar picture',
             title: 'Date of Birth',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            pattern: 'XX/XX/25XX'
+            description: 'A date represented by a day, month, and year.',
+            pattern: '03/09/2545'
         },
         {
             picture: Pin,
             pictureAlt: 'pin picture',
             title: 'Address',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            pattern: 'XXX ซอยลาดกระบัง 19 ถนนลาดกระบัง แขวงลาดกระบัง กรุงเทพฯ'
+            description: 'A physical address containing location and postal details.',
+            pattern: 'เลขที่บ้าน ซอย (optional) ถนน แขวงหรือตำบล เขตหรืออำเภอ จังหวัด รหัสไปรษนีย์'
         }
     ];
 
@@ -103,10 +121,22 @@
         class='relative h-0 flex-1 overflow-y-auto nice-scrollbar
                 scroll-smooth'>
         <NavBar />
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div class='h-full flex items-center justify-center'>
 			<div class='relative -translate-y-[6rem] px-[2rem] text-[12.5rem]
-                        font-[family-name:var(--navbar-font)]'>
+                        font-[family-name:var(--navbar-font)] cursor-none'
+                on:mousemove={handleCursorMove}
+                on:mouseenter={handleCursorEnter}
+                on:mouseleave={handleCursorLeave}>
                 Obscura+
+                <div class="pointer-events-none absolute z-20 h-[20rem] w-[20rem]
+                        rounded-full bg-[#D9D9D9]/20
+                        shadow-[0_4px_48px_rgba(0,0,0,0.25)]
+                        transition-opacity duration-200"
+                    class:opacity-0={!cursorVisible}
+                    class:opacity-100={cursorVisible}
+                    style={`left: ${cursorX}px; top: ${cursorY}px; transform: translate(-50%, -50%);`}>
+                </div>
             </div>
         </div>
 
