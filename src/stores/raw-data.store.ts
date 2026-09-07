@@ -1,4 +1,4 @@
-import type { RawData } from '$types/raw-data.type';
+import type { RawData } from '$appTypes/raw-data.type';
 import { createSecureStore } from './create-secure-store';
 
 import { derived } from 'svelte/store';

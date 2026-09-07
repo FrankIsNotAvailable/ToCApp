@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { MaskingData } from '$types/masking-data.type';
+	import type { MaskingData } from '$appTypes/masking-data.type';
 	import folderImg from '$lib/assets/foderimg.png';
 	import removeImg from '$lib/assets/remove.png';
 

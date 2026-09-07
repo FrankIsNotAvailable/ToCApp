@@ -1,0 +1,40 @@
+<script lang="ts">
+    import Navbar from '$components/NavBar.svelte';
+    import { onMount, type Snippet } from 'svelte';
+    import { goto } from '$app/navigation';
+    import AuthService from '$services/auth.service';
+    import { authStore } from '$stores/auth.store';
+    import UserService from '$services/user.service';
+
+    let { children }: { children: Snippet } = $props();
+    let isInitializing = $state(true);
+
+    onMount(async () => {
+        try {
+            if (!authStore.isAuthenticated()) {
+                await AuthService.tryRestoreSession();
+            }
+
+            if (!authStore.isAuthenticated()) {
+                await goto('/login', { replaceState: true });
+            }
+
+            const userData = await UserService.getMyData();
+            console.log('User data fetched successfully:', userData);
+        } catch (error) {
+            console.error('Session initialization error:', error);
+            await goto('/login', { replaceState: true });
+        } finally {
+            isInitializing = false;
+        }
+    });
+</script>
+
+{#if isInitializing}
+    <div class="flex h-screen items-center justify-center">
+        <p>Loading application...</p>
+    </div>
+{:else}
+    <Navbar />
+    {@render children()}
+{/if}
