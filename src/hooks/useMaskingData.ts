@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { maskingDataStore, isLoading, error, maskingData } from '$stores/masking-data.store';
 import { MaskingDataService } from '$services/masking-data.service';
-import type { MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$types/masking-data.type';
+import type { MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$appTypes/masking-data.type';
 
 export function useMaskingData() {
     const fetchMaskingDataList = async (

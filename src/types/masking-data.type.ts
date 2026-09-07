@@ -1,5 +1,5 @@
-import type { User } from '$types/user.type';
-import type { Meta } from '$types/meta-data.type';
+import type { User } from '$appTypes/user.type';
+import type { Meta } from '$appTypes/meta-data.type';
 
 export interface MaskingData {
   id: string;

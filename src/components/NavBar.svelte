@@ -1,5 +1,5 @@
 <script lang="ts">
-    import profile from '$lib/assets/profileholder.png';
+    import profile from '$lib/assets/profile.svg';
     import AuthGuard from '$guards/AuthGuard.svelte';
     import { useUser } from '$hooks/useUser';
 
