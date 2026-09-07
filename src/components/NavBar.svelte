@@ -1,16 +1,17 @@
 <script lang="ts">
     import profile from '$lib/assets/profileholder.png';
-    import { userStore } from '$stores/user.store';
     import AuthGuard from '$guards/AuthGuard.svelte';
+    import { useUser } from '$hooks/useUser';
 
     interface Props {
         userName?: string;
     }
 
     let { userName: customUserName }: Props = $props();
+    const { user } = useUser();
 
     const displayName = $derived(
-        customUserName ?? $userStore.data?.username ?? $userStore.data?.email ?? 'Invalid User'
+        customUserName ?? $user?.username ?? $user?.email ?? 'Invalid User'
     );
 </script>
 

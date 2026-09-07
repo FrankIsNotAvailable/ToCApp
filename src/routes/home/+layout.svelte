@@ -4,7 +4,7 @@
     import { goto } from '$app/navigation';
     import AuthService from '$services/auth.service';
     import { authStore } from '$stores/auth.store';
-    import UserService from '$services/user.service';
+    import { useUser } from '$hooks/useUser';
 
     let { children }: { children: Snippet } = $props();
     let isInitializing = $state(true);
@@ -18,9 +18,7 @@
             if (!authStore.isAuthenticated()) {
                 await goto('/login', { replaceState: true });
             }
-
-            const userData = await UserService.getMyData();
-            console.log('User data fetched successfully:', userData);
+            await useUser().fetchMyData();
         } catch (error) {
             console.error('Session initialization error:', error);
             await goto('/login', { replaceState: true });
