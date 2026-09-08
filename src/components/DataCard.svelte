@@ -33,7 +33,7 @@
 		<div class="h-16 w-px shrink-0 bg-black/25"></div>
 		<div class="flex flex-col gap-1">
 			<p class="font-masked-data text-[28px] leading-[1.2] font-normal text-black">
-				Data: {data.maskedData}
+				Data: {data.id}
 			</p>
 			<div class="flex flex-col">
 				<p class="font-masked-data text-[18px] leading-[1.2] font-normal text-[#767676]">

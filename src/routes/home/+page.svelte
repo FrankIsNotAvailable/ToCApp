@@ -80,15 +80,28 @@
 	async function handleDelete(id: string) {
 		const confirmed = confirm('Are you sure you want to delete this item?');
 		if (!confirmed) return;
+
 		try {
 			await deleteMaskingData(id);
 
 			rawBatchItems = rawBatchItems.filter((item) => item.id !== id);
 
-			if (displayedItems.length === 0 && hasPrevUiPage) {
-				goToPage(activeUiPage - 1);
-			} else if (displayedItems.length === 0 && totalUiPages > 0) {
-				await loadDataForUiPage(activeUiPage, true);
+			if (meta) {
+				meta = { ...meta, total: Math.max(0, meta.total - 1) };
+			}
+
+			const relativePageIndex = (activeUiPage - 1) % pagesPerBatch;
+			const start = relativePageIndex * displayPageSize;
+			const currentSlice = rawBatchItems.slice(start, start + displayPageSize);
+
+			if (currentSlice.length === 0) {
+				if (hasPrevUiPage) {
+					goToPage(activeUiPage - 1);
+				} else {
+					await loadDataForUiPage(activeUiPage, true);
+				}
+			} else if (currentSlice.length < displayPageSize && activeUiPage < totalUiPages) {
+				loadDataForUiPage(activeUiPage, true);
 			}
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to delete item';
