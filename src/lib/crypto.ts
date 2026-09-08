@@ -38,7 +38,7 @@ function generateSessionKey(): string {
 function getEncryptionKey(): string {
 	if (typeof window === 'undefined') return '';
 
-	const STORAGE_KEY = 'saig_enc_key';
+	const STORAGE_KEY = 'enc_key';
 	let key = localStorage.getItem(STORAGE_KEY);
 
 	if (!key) {
@@ -51,7 +51,7 @@ function getEncryptionKey(): string {
 
 export function clearEncryptionKey(): void {
 	if (typeof window === 'undefined') return;
-	localStorage.removeItem('saig_enc_key');
+	localStorage.removeItem('enc_key');
 }
 
 export async function encryptData(data: string): Promise<string> {

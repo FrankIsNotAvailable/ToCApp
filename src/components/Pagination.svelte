@@ -63,7 +63,7 @@
                     type="button"
                     onclick={() => onSelectPage(page)}
                     class="flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium transition-all {page === activePage
-                        ? 'bg-[#484848] text-neutral-50 font-bold scale-120'
+                        ? 'bg-[#484848] text-neutral-50 font-bold scale-[1.2]'
                         : 'bg-[#929292]/50 text-gray-900/70 hover:bg-black/20'}"
                     aria-label="Go to page {page}"
                 >

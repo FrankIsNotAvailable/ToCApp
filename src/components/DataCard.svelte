@@ -25,7 +25,7 @@
 <div
 	class="relative flex w-full shrink-0 items-center gap-4 overflow-hidden
 	rounded-3xl bg-white/34 px-6 py-4
-	transition-transform duration-200 ease-out hover:scale-[1.03] backdrop:blur-3xl"
+	transition-transform duration-200 ease-out hover:scale-[1.03] backdrop-blur-3xl"
 	style="height: {height}px;"
 >
 	<div class="flex items-center gap-4">

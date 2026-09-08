@@ -18,7 +18,7 @@ export class AuthService {
     }
 
 	static async refreshAccessToken(): Promise<string> {
-		const response = await ApiService.post<RefreshTokenResponse>('/auth/refresh/', { withCredentials: true });
+		const response = await ApiService.post<RefreshTokenResponse>('/auth/refresh/', null, { withCredentials: true });
 		const accessToken = response.data.at;
 		authStore.setAccessToken(accessToken);
 		return accessToken;

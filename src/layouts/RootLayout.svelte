@@ -16,7 +16,7 @@
 
 <div
     class="fixed inset-0 -z-10 bg-cover bg-center mix-blend-luminosity opacity-44"
-    style="background-image: url('{background}')"
+     style="background-image: url({background})"
 ></div>
 <div class="flex min-h-screen flex-col font-main">
 	{@render children()}

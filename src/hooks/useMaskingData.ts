@@ -10,9 +10,11 @@ export function useMaskingData() {
         orderBy?: 'ASC' | 'DESC',
         forceRefresh: boolean = false
     ): Promise<MaskingDataResponse | null> => {
+        const cachedData = get(maskingDataStore).data;
         const cacheValid = await maskingDataStore.isCacheValid();
+        const isSamePageCached = cachedData?.meta?.currentPage === page;
 
-        const shouldFetch = !cacheValid || forceRefresh;
+        const shouldFetch = !cacheValid || !isSamePageCached || forceRefresh;
 
         if (shouldFetch) {
             try {

@@ -115,7 +115,6 @@
 
 <DataList
 	items={displayedItems}
-	{meta}
 	onEdit={handleEdit}
 	onDelete={handleDelete}
 	{goToPage}

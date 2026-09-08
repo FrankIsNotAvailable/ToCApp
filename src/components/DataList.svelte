@@ -2,12 +2,10 @@
 	import DataCard from './DataCard.svelte';
 	import plus from '$lib/assets/plus.svg';
 	import type { MaskingData } from '$appTypes/masking-data.type';
-	import type { Meta } from '$appTypes/meta-data.type';
 	import Pagination from './Pagination.svelte';
 
 	let {
 		items,
-		meta,
 		onEdit,
 		onDelete,
 		goToPage,
@@ -20,7 +18,6 @@
 		hasNextPage
 	}: {
 		items: MaskingData[];
-		meta: Meta | null;
 		isLoading: boolean;
 		error: string | null;
 		activePage: number;
@@ -34,11 +31,11 @@
 	} = $props();
 
 	function handleNextPage() {
-		meta?.nextPage && goToPage(activePage + 1);
+		goToPage(activePage + 1);
 	}
 
 	function handlePrevPage() {
-		meta?.prevPage && goToPage(activePage - 1);
+		goToPage(activePage - 1);
 	}
 </script>
 
