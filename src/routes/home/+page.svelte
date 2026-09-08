@@ -6,11 +6,11 @@
 	import type { Meta } from '$appTypes/meta-data.type';
 	import { goto } from '$app/navigation';
 
-	const { fetchMaskingDataList } = useMaskingData();
+	const { fetchMaskingDataList, deleteMaskingData } = useMaskingData();
 
-	const displayPageSize = 10; 
-	const backendBatchSize = 40; 
-	const pagesPerBatch = backendBatchSize / displayPageSize; 
+	const displayPageSize = 10;
+	const backendBatchSize = 40;
+	const pagesPerBatch = backendBatchSize / displayPageSize;
 
 	let rawBatchItems = $state<MaskingData[]>([]);
 	let meta = $state<Meta | null>(null);
@@ -21,9 +21,7 @@
 
 	let loadedBackendPage = $state<number | null>(null);
 
-	let totalUiPages = $derived(
-		meta?.total ? Math.ceil(meta.total / displayPageSize) : 1
-	);
+	let totalUiPages = $derived(meta?.total ? Math.ceil(meta.total / displayPageSize) : 1);
 
 	let hasPrevUiPage = $derived(activeUiPage > 1);
 	let hasNextUiPage = $derived(activeUiPage < totalUiPages);
@@ -79,27 +77,38 @@
 		goto(`/home/edit/${id}`);
 	}
 
-	function handleDelete(id: string) {
-		rawBatchItems = rawBatchItems.filter((item) => item.id !== id);
-		if (displayedItems.length === 0 && hasPrevUiPage) {
-			goToPage(activeUiPage - 1);
+	async function handleDelete(id: string) {
+		const confirmed = confirm('Are you sure you want to delete this item?');
+		if (!confirmed) return;
+		try {
+			await deleteMaskingData(id);
+
+			rawBatchItems = rawBatchItems.filter((item) => item.id !== id);
+
+			if (displayedItems.length === 0 && hasPrevUiPage) {
+				goToPage(activeUiPage - 1);
+			} else if (displayedItems.length === 0 && totalUiPages > 0) {
+				await loadDataForUiPage(activeUiPage, true);
+			}
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Failed to delete item';
 		}
 	}
 
-    function handleError() {
-        loadDataForUiPage(activeUiPage, true)
-    }
+	function handleError() {
+		loadDataForUiPage(activeUiPage, true);
+	}
 </script>
 
 <DataList
 	items={displayedItems}
-	meta={meta}
+	{meta}
 	onEdit={handleEdit}
 	onDelete={handleDelete}
-	goToPage={goToPage}
+	{goToPage}
 	onError={handleError}
-	isLoading={isLoading}
-	error={error}
+	{isLoading}
+	{error}
 	activePage={activeUiPage}
 	totalPages={totalUiPages}
 	hasPrevPage={hasPrevUiPage}
