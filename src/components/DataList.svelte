@@ -34,11 +34,11 @@
 	} = $props();
 
 	function handleNextPage() {
-		meta?.nextPage && goToPage(meta.nextPage);
+		meta?.nextPage && goToPage(activePage + 1);
 	}
 
 	function handlePrevPage() {
-		meta?.prevPage && goToPage(meta.prevPage);
+		meta?.prevPage && goToPage(activePage - 1);
 	}
 </script>
 
