@@ -89,10 +89,12 @@
 	</div>
 {/if}
 
-<button class="fixed right-6 bottom-6 z-10 cursor-pointer">
+<a
+	href="/create-data"
+	aria-label="add masked data"
+	class="fixed right-6 bottom-6 z-10 cursor-pointer"
+>
 	<GlassyButton>
-		<a href="/create-data" aria-label="add masked data">
-			<img src={plus} alt="" class="h-14 w-14 object-contain" />
-		</a>
+		<img src={plus} alt="" class="h-14 w-14 object-contain" />
 	</GlassyButton>
-</button>
+</a>
