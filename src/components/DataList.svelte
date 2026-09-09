@@ -3,6 +3,7 @@
 	import plus from '$lib/assets/plus.svg';
 	import type { MaskingData } from '$appTypes/masking-data.type';
 	import Pagination from './Pagination.svelte';
+	import GlassyButton from './GlassyButton.svelte';
 
 	let {
 		items,
@@ -72,7 +73,7 @@
 {:else}
 	<div class="flex flex-col gap-4">
 		{#each items as item (item.id)}
-			<DataCard data={item} onEdit={onEdit} onDelete={onDelete} height={140} />
+			<DataCard data={item} {onEdit} {onDelete} height={140} />
 		{/each}
 	</div>
 	<div class="pt-2">
@@ -88,6 +89,10 @@
 	</div>
 {/if}
 
-<a href="/create-data" aria-label="add masked data" class="fixed right-6 bottom-6 z-10">
-	<img src={plus} alt="" class="h-14 w-14 object-contain" />
-</a>
+<div class="fixed right-6 bottom-6 z-10">
+	<GlassyButton>
+		<a href="/create-data" aria-label="add masked data">
+			<img src={plus} alt="" class="h-14 w-14 object-contain" />
+		</a>
+	</GlassyButton>
+</div>
