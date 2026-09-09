@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { maskingDataStore, isLoading, error, maskingData } from '$stores/masking-data.store';
 import { MaskingDataService } from '$services/masking-data.service';
-import type { MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$types/masking-data.type';
+import type { MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$appTypes/masking-data.type';
 
 export function useMaskingData() {
     const fetchMaskingDataList = async (
@@ -10,9 +10,11 @@ export function useMaskingData() {
         orderBy?: 'ASC' | 'DESC',
         forceRefresh: boolean = false
     ): Promise<MaskingDataResponse | null> => {
+        const cachedData = get(maskingDataStore).data;
         const cacheValid = await maskingDataStore.isCacheValid();
+        const isSamePageCached = cachedData?.meta?.currentPage === page;
 
-        const shouldFetch = !cacheValid || forceRefresh;
+        const shouldFetch = !cacheValid || !isSamePageCached || forceRefresh;
 
         if (shouldFetch) {
             try {

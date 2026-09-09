@@ -10,15 +10,12 @@
 
     onMount(async () => {
         if ($authStore.accessToken) {
-            await goto('/');
             return;
         }
 
-       
         const accessToken = page.url.searchParams.get('at');
         if (accessToken) {
             authStore.setAccessToken(accessToken);
-            await goto('/', { replaceState: true });
             return;
         }
 

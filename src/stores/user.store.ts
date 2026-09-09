@@ -1,10 +1,10 @@
-import type { User } from '$types/user.type';
+import type { User } from '$appTypes/user.type';
 import { createSecureStore } from './create-secure-store';
 
 import { derived } from 'svelte/store';
 
 const STORAGE_KEY = 'user_enc';
-const CACHE_DURATION = 10 * 60 * 60 * 1000;
+const CACHE_DURATION = 60 * 60 * 1000;
 
 const baseStore = createSecureStore<User>({
 	storageKey: STORAGE_KEY,

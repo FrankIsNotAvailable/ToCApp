@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { encryptData, decryptData, hashData } from '$lib/crypto';
-import type { SecureStoreConfig, CachedData, BaseState } from '$types/store.type';
+import type { SecureStoreConfig, CachedData, BaseState } from '$appTypes/store.type';
 
 export function createSecureStore<T>(config: SecureStoreConfig<T>) {
 	const {

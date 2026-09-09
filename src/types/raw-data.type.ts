@@ -1,4 +1,4 @@
-import type { User } from '$types/user.type';
+import type { User } from '$appTypes/user.type';
 
 export interface RawData {
     id: string;

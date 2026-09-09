@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { userStore, isLoading, error, user } from '$stores/user.store';
 import { UserService } from '$services/user.service';
-import type { User } from '$types/user.type';
+import type { User } from '$appTypes/user.type';
 
 export function useUser() {
 	const fetchMyData = async (forceRefresh: boolean = false): Promise<User | null> => {
