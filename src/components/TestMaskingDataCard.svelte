@@ -34,7 +34,7 @@
         headerBgColor="bg-white"
         textAreaBgColor="bg-white"
         isReadOnly={false}
-        textAreaPlaceholder="Enter your data here..."
+        textAreaPlaceholder="012-345-6789 DOB:01/01/2559 john.doe@example.com..."
         topButton={true}
         topButtonImage={Trash}
         topButtonAlt="Trash"
