@@ -31,7 +31,7 @@
 
     function handleLogout(){
         AuthService.logout();
-        window.location.href = '/login';
+        window.location.reload();
     }
 </script>
 

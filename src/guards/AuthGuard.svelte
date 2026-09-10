@@ -13,7 +13,7 @@
 
 	let isChecking = $state(!authStore.isAuthenticated());
 
-	let isAuthenticated = $derived(authStore.isAuthenticated());
+	let isAuthenticated = $derived(!!$authStore.accessToken);
 
 	$effect(() => {
 		if (!authStore.isAuthenticated()) {
