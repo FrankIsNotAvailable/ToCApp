@@ -46,7 +46,7 @@
         actionButtonAlt="Shield"
         actionButtonBackgroundColor="bg-black"
         actionButtonTextColor="text-white"
-        actionButtonBorderColor="border-black"
+        actionButtonBorderColor="border-black cursor-pointer hover:border-gray-200"
         onclickActionButton={onMask}
     />
 
@@ -64,9 +64,9 @@
         actionButtonTitle="Copy to Clipboard"
         actionButtonImage={WhiteCopy}
         actionButtonAlt="Copy"
-        actionButtonBackgroundColor="bg-transparent"
+        actionButtonBackgroundColor="bg-transparent hover:bg-gray-200"
         actionButtonTextColor="text-[#BABABA]"
-        actionButtonBorderColor="border-[#F7F9FB]"
+        actionButtonBorderColor="border-[#F7F9FB] cursor-pointer"
         onclickActionButton={onCopy}
     />
 </div>
