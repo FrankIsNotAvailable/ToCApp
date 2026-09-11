@@ -3,7 +3,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/state';
     import { authStore } from '$stores/auth.store';
-    import bgImage from '$lib/assets/mainbackground.png';
+    import bgImage from '$lib/assets/background.svg';
 
     let errorMessage = '';
 
