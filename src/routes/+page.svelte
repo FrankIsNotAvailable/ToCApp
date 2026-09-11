@@ -11,8 +11,8 @@
 
 	<div class="min-h-0 flex-1 overflow-y-auto">
 		<div class="min-h-full flex items-center justify-center py-[1rem]">
-			<!-- <HomeDataAvaliable /> -->
-			<PersonalInfo personalTitle="Personal Information Entry" />
+			<HomeDataAvaliable />
+			<!-- <Sayhello /> -->
 		</div>
 	</div>
 </div>

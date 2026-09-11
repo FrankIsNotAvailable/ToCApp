@@ -1,6 +1,6 @@
 <script>
 	import NavBar from '$components/NavBar.svelte';
-	import PersonalInfo from '$components/PersonalInfo.svelte';
+	import PersonalInfo from '$components/personalInfo.svelte';
 </script>
 
 <NavBar />

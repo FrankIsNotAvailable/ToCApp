@@ -3,6 +3,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/state';
     import { authStore } from '$stores/auth.store';
+    import bgImage from '$lib/assets/mainbackground.png';
 
     let errorMessage = '';
 
@@ -44,9 +45,13 @@
         window.location.href = BACKEND_LOGIN_URL;
     }
 </script>
+<div
+    class="fixed inset-0 -z-30 bg-cover bg-center opacity-[44%] mix-blend-luminosity"
+    style="background-image: url({bgImage});"></div>
+<div class="fixed inset-0 -z-20 backdrop-blur-[52px] border-[#F6F4E9]/60 bg-[#F6F4E9]/44"></div>
 
-<div class="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-    <div class="w-full max-w-md space-y-8 rounded-xl border border-gray-100 bg-white p-8 shadow-lg">
+<div class="flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-8 rounded-xl border border-[#F6F4E9]/60 bg-[#F6F4E9]/70 p-8 shadow-lg backdrop-blur-xl">
         <div class="text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
             <p class="mt-2 text-sm text-gray-600">
@@ -83,6 +88,11 @@
                 </svg>
                 <span>Sign in with Google</span>
             </button>
+            <div>
+                <a href="/create-data" class="mt-4 block text-center text-sm text-gray-600 hover:text-gray-800" style="text-decoration: underline;">
+                    Continue as guest
+                </a>
+            </div>
         </div>
     </div>
 </div>
