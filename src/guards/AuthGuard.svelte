@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { authStore } from '$stores/auth.store';
+	import AuthService from '$services/auth.service';
 
 	interface Props {
 		requireAuth: boolean;
@@ -10,9 +11,21 @@
 
 	let { requireAuth = true, children, fallback }: Props = $props();
 
-	const isAuthenticated = $derived(!!$authStore.accessToken);
+	let isChecking = $state(!authStore.isAuthenticated());
 
-	const canRender = $derived(!requireAuth || isAuthenticated);
+	let isAuthenticated = $derived(!!$authStore.accessToken);
+
+	$effect(() => {
+		if (!authStore.isAuthenticated()) {
+			AuthService.tryRestoreSession().finally(() => {
+				isChecking = false;
+			});
+		} else {
+			isChecking = false;
+		}
+	});
+
+	let canRender = $derived(!requireAuth || (isAuthenticated && !isChecking));
 </script>
 
 {#if canRender}
