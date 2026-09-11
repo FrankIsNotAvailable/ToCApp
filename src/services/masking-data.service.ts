@@ -1,5 +1,5 @@
 import ApiService from './api.service';
-import type { MaskingData, MaskingDataQueryParams, UpdateMaskingDataPayload, MaskingDataResponse } from '$types/masking-data.type';
+import type { MaskingData, MaskingDataQueryParams, UpdateMaskingDataPayload, MaskingDataResponse } from '$appTypes/masking-data.type';
 
 
 export class MaskingDataService {

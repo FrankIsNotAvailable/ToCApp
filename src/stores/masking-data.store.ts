@@ -1,4 +1,4 @@
-import type { MaskingData, MaskingDataResponse } from '$types/masking-data.type';
+import type { MaskingData, MaskingDataResponse } from '$appTypes/masking-data.type';
 import { createSecureStore } from './create-secure-store';
 
 import { derived, get } from 'svelte/store';
