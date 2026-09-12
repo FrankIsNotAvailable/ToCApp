@@ -80,7 +80,7 @@
                 </svg>
                 <span>Continue with Google</span>
             </button>
-            <a href="/create-data" class="text-center text-sm text-gray-600 hover:text-gray-800" style="text-decoration: underline;">
+            <a href="/test/masking" class="text-center text-sm text-gray-600 hover:text-gray-800" style="text-decoration: underline;">
                 Continue as a guest
             </a>
         </div>
