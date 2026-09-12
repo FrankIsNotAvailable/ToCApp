@@ -8,18 +8,27 @@
 		data,
 		onEdit,
 		onDelete,
-		height = 222
+		height = 222,
+		onClick
 	}: {
 		data: MaskingData;
 		onEdit: (id: string) => void;
 		onDelete: (id: string) => void;
 		height?: number;
+		onClick: (id: string) => void;
 	} = $props();
 
 	function formatDate(date: string) {
 		const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(`${date}T00:00:00`) : new Date(date);
  		return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 	}
+
+	function handleKeyDown(e: KeyboardEvent, id: string) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClick(id);
+        }
+    }
 </script>
 
 <div
@@ -27,6 +36,8 @@
 	rounded-3xl bg-white/34 px-6 py-4
 	transition-transform duration-200 ease-out hover:scale-[1.03] backdrop-blur-3xl"
 	style="height: {height}px;"
+	onclick={() => onClick(data.id)}
+	onkeydown={(e) => handleKeyDown(e, data.id)}
 >
 	<div class="flex items-center gap-4">
 		<img src={folderImg} alt="" class="h-16 w-16 shrink-0 object-contain" />

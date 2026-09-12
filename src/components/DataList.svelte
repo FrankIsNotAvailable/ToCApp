@@ -11,6 +11,7 @@
 		onDelete,
 		goToPage,
 		onError,
+		onClick,
 		isLoading,
 		error,
 		activePage,
@@ -29,6 +30,7 @@
 		onDelete: (id: string) => void;
 		goToPage: (targetPage: number) => void;
 		onError: () => void;
+		onClick: (id: string) => void;
 	} = $props();
 
 	function handleNextPage() {
@@ -73,7 +75,7 @@
 {:else}
 	<div class="flex flex-col gap-4">
 		{#each items as item (item.id)}
-			<DataCard data={item} {onEdit} {onDelete} height={140} />
+			<DataCard data={item} {onEdit} {onDelete} {onClick} height={140} />
 		{/each}
 	</div>
 	<div class="pt-2">
