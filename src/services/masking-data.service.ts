@@ -1,10 +1,18 @@
 import ApiService from './api.service';
 import type { MaskingData, MaskingDataQueryParams, UpdateMaskingDataPayload, MaskingDataResponse } from '$appTypes/masking-data.type';
+import type { RawData } from '$appTypes/raw-data.type';
 
 
 export class MaskingDataService {
 	static async getMaskingDataById(id: string): Promise<MaskingData> {
 		const response = await ApiService.get<MaskingData>(`/masking-data/${id}`);
+		return response.data;
+	}
+
+	static async getRawDataById(id: string): Promise<RawData> {
+		const response = await ApiService.get<RawData>(`/masking-data/${id}`,
+			{ params: { showActualData: true } }
+		);
 		return response.data;
 	}
 

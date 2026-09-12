@@ -111,6 +111,10 @@
 	function handleError() {
 		loadDataForUiPage(activeUiPage, true);
 	}
+
+	function handleClick(id: string) {
+		goto(`/home/${id}`);
+	}
 </script>
 
 <div class="flex flex-col items-center">
@@ -119,6 +123,7 @@
 			items={displayedItems}
 			onEdit={handleEdit}
 			onDelete={handleDelete}
+			onClick={handleClick}
 			{goToPage}
 			onError={handleError}
 			{isLoading}
