@@ -20,37 +20,65 @@
     let maskedText = $state<string | null>(null);
     let showData = $state<string | null>(null);
 
+    function clearError() {
+        errorMsg = null;
+    }
+
     onMount(async () => {
         if (id) {
-            const maskingData = await fetchMaskingDataById(id);
-            if (!maskingData) {
-                errorMsg = 'Failed to load data';
-            } else {
-                maskedText = maskingData.maskedData;
-                showData = maskedText;
+            clearError();
+            try {
+                const maskingData = await fetchMaskingDataById(id);
+                if (!maskingData) {
+                    errorMsg = 'Failed to load data';
+                } else {
+                    maskedText = maskingData.maskedData;
+                    showData = maskedText;
+                }
+            } catch (err) {
+                errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
             }
         }
     });
 
     async function handleToggleVisibility() {
         if (!id) return;
+        clearError();
 
-        if (!isTextVisible) {
-            const rawData = await fetchRawDataById(id);
-            if (!rawData) {
-                errorMsg = 'Failed to load raw data';
-                return;
+        try {
+            if (!isTextVisible) {
+                const rawData = await fetchRawDataById(id);
+                if (!rawData) {
+                    errorMsg = 'Failed to load raw data';
+                    return;
+                }
+                showData = rawData.encData;
+            } else {
+                showData = maskedText;
             }
-            showData = rawData.encData;
-        } else {
-            showData = maskedText;
-        }
 
-        isTextVisible = !isTextVisible;
+            isTextVisible = !isTextVisible;
+        } catch (err) {
+            errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
+        }
     }
 </script>
 
 <DataEntryLayout isLoading={$isMaskingDataLoading || $isRawdataLoading} errorMessage={errorMsg}>
+    {#if errorMsg}
+        <div class="mb-4 flex items-center justify-between rounded-xl bg-red-100 border border-red-300 px-4 py-3 text-red-700">
+            <span>{errorMsg}</span>
+            <button 
+                type="button" 
+                onclick={clearError}
+                class="ml-4 font-semibold hover:opacity-75 focus:outline-none"
+                aria-label="Dismiss error"
+            >
+                ✕
+            </button>
+        </div>
+    {/if}
+
     {#if showData !== null}
         <ActionDataCard
             bind:text={showData}
