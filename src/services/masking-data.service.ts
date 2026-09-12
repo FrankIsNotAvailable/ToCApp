@@ -22,6 +22,16 @@ export class MaskingDataService {
 		return response.data;
 	}
 
+	static async createMaskingData(data: string): Promise<MaskingData> {
+		const response = await ApiService.post<MaskingData>('/masking-data', { data });
+		return response.data;
+	}
+
+	static async maskedDataForGuest(data: string): Promise<{ maskedText: string }> {
+		const response = await ApiService.post<{ maskedText: string }>('/masking-data/guest', { data });
+		return response.data;
+	}
+
 	static async updateMaskingData(id: string, data: UpdateMaskingDataPayload): Promise<MaskingData> {
 		const response = await ApiService.patch<MaskingData>(`/masking-data/${id}`, data);
 		return response.data;
