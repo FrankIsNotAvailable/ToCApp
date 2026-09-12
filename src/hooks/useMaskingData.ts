@@ -132,6 +132,25 @@ export function useMaskingData() {
         }
     };
 
+    const maskDataForGuest = async (data: string): Promise<{ maskedText: string } | null> => {
+        try {
+            maskingDataStore.setLoading(true);
+            maskingDataStore.setError(null);
+
+            const maskedData = await MaskingDataService.maskedDataForGuest(data);
+
+            return maskedData;
+        } catch (err) {
+            console.error(`Error masking data for guest:`, err);
+            maskingDataStore.setError(
+                err instanceof Error ? err.message : 'Failed to mask data for guest'
+            );
+            return null;
+        } finally {
+            maskingDataStore.setLoading(false);
+        }
+    };
+
     const clearMaskingDataList = () => {
         maskingDataStore.clearMaskingData();
     };
@@ -154,6 +173,7 @@ export function useMaskingData() {
         updateMaskingDataList,
         clearMaskingDataList,
 
+        maskDataForGuest,
         getMaskingDataList,
         isCacheValid,
 
