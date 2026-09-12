@@ -2,6 +2,7 @@
     import type { Snippet } from 'svelte';
     import BaseCard from '$layouts/BaseCard.svelte';
     import Back from '$lib/assets/previous.svg';
+    import Spinner from '$components/Spinner.svelte';
 
     let {
         title = 'Personal Information Entry',
@@ -19,8 +20,8 @@
 </script>
 
 {#if isLoading}
-    <div class="flex flex-1 flex-col items-center justify-center gap-3">
-        <p class="text-center font-masked-data text-[18px] text-[#767676]">Loading data...</p>
+    <div class="flex flex-1 flex-col items-center justify-center min-h-[300px]">
+        <Spinner size="lg" label="Loading data..." />
     </div>
 {:else if errorMessage}
     <div class="flex flex-1 flex-col items-center justify-center gap-3">

@@ -4,6 +4,7 @@
 	import type { MaskingData } from '$appTypes/masking-data.type';
 	import Pagination from './Pagination.svelte';
 	import GlassyButton from './GlassyButton.svelte';
+	import Spinner from './Spinner.svelte';
 
 	let {
 		items,
@@ -50,7 +51,7 @@
 
 {#if isLoading}
 	<div class="flex flex-1 flex-col items-center justify-center gap-3">
-		<p class="text-center font-masked-data text-[18px] text-[#767676]">Loading data...</p>
+		<Spinner size="lg" label="Loading data..." />
 	</div>
 {:else if error}
 	<div class="flex flex-1 flex-col items-center justify-center gap-3">
