@@ -4,7 +4,7 @@ import { createSecureStore } from './create-secure-store';
 import { derived } from 'svelte/store';
 
 const STORAGE_KEY = 'raw_data_enc';
-const CACHE_DURATION = 5 * 60 * 1000;
+const CACHE_DURATION = 1 * 60 * 1000;
 
 const baseStore = createSecureStore<RawData>({
     storageKey: STORAGE_KEY,
