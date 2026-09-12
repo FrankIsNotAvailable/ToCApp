@@ -33,10 +33,8 @@
 		<p>Loading application...</p>
 	</div>
 {:else}
-	<Navbar />
-	<div class="flex min-h-screen flex-col items-center">
-		<div class="w-full max-w-5xl px-4 py-6">
-			{@render children()}
-		</div>
+	<div class="flex min-h-screen flex-col">
+		<Navbar />
+		{@render children()}
 	</div>
 {/if}

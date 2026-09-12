@@ -113,16 +113,20 @@
 	}
 </script>
 
-<DataList
-	items={displayedItems}
-	onEdit={handleEdit}
-	onDelete={handleDelete}
-	{goToPage}
-	onError={handleError}
-	{isLoading}
-	{error}
-	activePage={activeUiPage}
-	totalPages={totalUiPages}
-	hasPrevPage={hasPrevUiPage}
-	hasNextPage={hasNextUiPage}
-/>
+<div class="flex flex-col items-center">
+	<div class="w-full max-w-5xl px-4 py-6">
+		<DataList
+			items={displayedItems}
+			onEdit={handleEdit}
+			onDelete={handleDelete}
+			{goToPage}
+			onError={handleError}
+			{isLoading}
+			{error}
+			activePage={activeUiPage}
+			totalPages={totalUiPages}
+			hasPrevPage={hasPrevUiPage}
+			hasNextPage={hasNextUiPage}
+		/>
+	</div>
+</div>
