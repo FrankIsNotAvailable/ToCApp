@@ -1,5 +1,5 @@
 import ApiService from './api.service';
-import type { MaskingData, MaskingDataQueryParams, UpdateMaskingDataPayload, MaskingDataResponse } from '$appTypes/masking-data.type';
+import type { MaskingData, MaskingDataQueryParams, UpdateMaskingDataPayload, MaskingDataResponse, CreateMaskingDataResponse } from '$appTypes/masking-data.type';
 import type { RawData } from '$appTypes/raw-data.type';
 
 
@@ -30,8 +30,8 @@ export class MaskingDataService {
 		return response.data;
 	}
 
-	static async createMaskingData(data: string): Promise<MaskingData> {
-		const response = await ApiService.post<MaskingData>('/masking-data', { data });
+	static async createMaskingData(data: string): Promise<CreateMaskingDataResponse> {
+		const response = await ApiService.post<CreateMaskingDataResponse>('/masking-data/', { data });
 		return response.data;
 	}
 
