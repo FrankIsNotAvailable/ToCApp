@@ -65,20 +65,6 @@
 </script>
 
 <DataEntryLayout isLoading={$isMaskingDataLoading || $isRawdataLoading} errorMessage={errorMsg}>
-    {#if errorMsg}
-        <div class="mb-4 flex items-center justify-between rounded-xl bg-red-100 border border-red-300 px-4 py-3 text-red-700">
-            <span>{errorMsg}</span>
-            <button 
-                type="button" 
-                onclick={clearError}
-                class="ml-4 font-semibold hover:opacity-75 focus:outline-none"
-                aria-label="Dismiss error"
-            >
-                ✕
-            </button>
-        </div>
-    {/if}
-
     {#if showData !== null}
         <ActionDataCard
             bind:text={showData}

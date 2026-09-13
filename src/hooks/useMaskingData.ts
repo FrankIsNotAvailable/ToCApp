@@ -7,7 +7,7 @@ export function useMaskingData() {
     const fetchMaskingDataList = async (
         page: number = 1,
         pageSize: number = 20,
-        orderBy?: 'ASC' | 'DESC',
+        orderBy: 'ASC' | 'DESC' = 'ASC',
         forceRefresh: boolean = false
     ): Promise<MaskingDataResponse | null> => {
         const cachedData = get(maskingDataStore).data;
