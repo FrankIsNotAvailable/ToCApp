@@ -46,8 +46,8 @@
 		if (!id) return;
 		clearError();
 
-		if (rawText === null) {
-			errorMsg = 'Invalid data or ID';
+		if (rawText === null || rawText.trim() === '') {
+			errorMsg = 'Invalid data';
 			return;
 		}
 		try {
