@@ -82,7 +82,7 @@
 			topButtonText="Clear"
 			onclickTopButton={handleClearText}
 			actionButton={true}
-			actionButtonTitle="Update Mask Text"
+			actionButtonTitle="Update Text"
 			actionButtonImage={WhiteProtect}
 			actionButtonAlt="Shield"
 			actionButtonBackgroundColor="bg-black"
