@@ -74,7 +74,7 @@
 	}
 
 	function handleEdit(id: string) {
-		goto(`/home/edit/${id}`);
+		goto(`/home/edit-data/${id}`);
 	}
 
 	async function handleDelete(id: string) {
