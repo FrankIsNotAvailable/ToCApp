@@ -4,15 +4,42 @@
     import Note from '$lib/assets/input.svg';
     import Trash from '$lib/assets/remove.svg';
     import WhiteProtect from '$lib/assets/protectwhite.svg';
+	import { goto } from '$app/navigation';
+	import { useMaskingData } from '$hooks/useMaskingData';
+
+	const { createMaskingData, isLoading: isMaskingDataLoading } = useMaskingData();
+
+	let errorMsg = $state<string | null>(null);
+
+	function clearError() {
+		errorMsg = null;
+	}
+
+	function handleClearText() {
+		rawText = '';
+	}
 
     let rawText = $state<string>('');
 
-    function handleClearText() {
-        rawText = '';
-    }
+	async function handleCreateData() {
+		if (!rawText || rawText.trim() === '') {
+			return;
+		}
+        clearError();
+        try {
+            const newMaskingData = await createMaskingData(rawText);
+            if(!newMaskingData || !newMaskingData.data || !newMaskingData.data.id) {
+                errorMsg = 'Failed to create masked data';
+                return;
+            }
+            goto(`/home/data/${newMaskingData.data.id}`);
+        } catch (err) {
+            errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
+        }
+	}
 </script>
 
-<DataEntryLayout>
+<DataEntryLayout isLoading={$isMaskingDataLoading} errorMessage={errorMsg}>
     <ActionDataCard
         bind:text={rawText}
         width="w-full"
@@ -35,5 +62,6 @@
         actionButtonBackgroundColor="bg-black"
         actionButtonTextColor="text-white"
         actionButtonBorderColor="border-black cursor-pointer hover:border-gray-200"
+        onclickActionButton={handleCreateData}
     />
 </DataEntryLayout>
