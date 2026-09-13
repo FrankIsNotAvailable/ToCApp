@@ -11,7 +11,7 @@
 	import { useMaskingData } from '$hooks/useMaskingData';
 
 	const { updateMaskingDataById, isLoading: isMaskingDataLoading } = useMaskingData();
-	const { fetchRawDataById, isLoading: isRawdataLoading } = useRawData();
+	const { fetchRawDataById, isLoading: isRawdataLoading, updateRawData } = useRawData();
 
 	const id = $derived(page.params.id);
 
@@ -52,6 +52,7 @@
 		}
 		try {
 			await updateMaskingDataById(id, { data: rawText });
+            updateRawData(rawText);
             goto(`/home/data/${id}`);
 		} catch (err) {
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
