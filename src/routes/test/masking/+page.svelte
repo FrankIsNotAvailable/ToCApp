@@ -22,13 +22,16 @@
 			maskedText = '';
 			return;
 		}
-
-		isLoading = true;
-		const result = await maskDataForGuest(rawText);
-		isLoading = false;
-
-		if (result && result.maskedText) {
-			maskedText = result.maskedText;
+		try {
+			isLoading = true;
+			const result = await maskDataForGuest(rawText);
+			if (result && result.maskedText) {
+				maskedText = result.maskedText;
+			}
+		} catch (error) {
+			console.error('Error masking data:', error);
+		} finally {
+			isLoading = false;
 		}
 	}
 

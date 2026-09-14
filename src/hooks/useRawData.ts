@@ -41,6 +41,10 @@ export function useRawData() {
         rawDataStore.clearRawData();
     };
 
+    const updateRawData = (rawData: string) => {
+        rawDataStore.updateRawData({ encData: rawData });
+    }
+
     const getRawData = (): RawData | null => {
         return get(rawDataStore).data;
     };
@@ -54,6 +58,7 @@ export function useRawData() {
         clearRawData,
         getRawData,
         isCacheValid,
+        updateRawData,
 
         isLoading,
         error,

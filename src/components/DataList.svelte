@@ -66,7 +66,7 @@
 	</div>
 {:else if items.length === 0}
 	<div class="flex flex-1 flex-col items-center justify-center gap-3">
-		<a href="/home/create-data" aria-label="add masked_data">
+		<a href="/home/data/create" aria-label="add masked_data">
 			<img src={plus} alt="" class="h-10 w-10 object-contain" />
 		</a>
 		<p class="text-center font-masked-data text-[18px] leading-[1.4] font-normal text-[#767676]">
@@ -93,7 +93,7 @@
 {/if}
 
 <a
-	href="/home/create-data"
+	href="/home/data/create"
 	aria-label="add masked data"
 	class="fixed right-6 bottom-6 z-10 cursor-pointer"
 >
