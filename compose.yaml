@@ -1,7 +1,7 @@
 name: toc-app
 
 services:
-  toc-app:
+  frontend:
     build:
       context: .
       target: development 

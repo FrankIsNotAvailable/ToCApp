@@ -1,7 +1,7 @@
 name: toc-app-prod
 
 services:
-  toc-app-prod:
+  frontend:
     build:
       context: .
       target: production
