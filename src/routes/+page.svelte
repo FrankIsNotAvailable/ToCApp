@@ -129,10 +129,9 @@
                 on:mouseenter={handleCursorEnter}
                 on:mouseleave={handleCursorLeave}>
                 Obscura+
-                <div class="pointer-events-none absolute z-20 h-[20rem] w-[20rem]
-                        rounded-full bg-[#D9D9D9]/20
-                        shadow-[0_4px_48px_rgba(0,0,0,0.25)]
-                        transition-opacity duration-200"
+                <div class="pointer-events-none absolute z-20 h-[20rem] w-[20rem] ring-1 ring-white/75
+                            rounded-full bg-[#D9D9D9]/20 backdrop-blur-sm
+                            shadow-[0_4px_48px_rgba(0,0,0,0.25)] transition-opacity duration-200"
                     class:opacity-0={!cursorVisible}
                     class:opacity-100={cursorVisible}
                     style={`left: ${cursorX}px; top: ${cursorY}px; transform: translate(-50%, -50%);`}>
