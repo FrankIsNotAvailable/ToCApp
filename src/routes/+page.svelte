@@ -1,8 +1,8 @@
 <script>
 	import NavBar from '$components/LandingNavBar.svelte';
     import SupportedData from '$components/SupportedData.svelte';
-    import KeyArt from '$lib/assets/keyart.txt?raw';
-    import LockArt from '$lib/assets/lockart.txt?raw';
+    import KeyArt from '$lib/assets/key-art.webp';
+    import LockArt from '$lib/assets/lock-art.webp';
     import Arrow from '$lib/assets/arrow.svg';
     import Pen from '$lib/assets/pen.svg';
     import Plus from '$lib/assets/plus.svg';

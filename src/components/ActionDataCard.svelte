@@ -25,6 +25,7 @@
 		actionButtonBorderColor?: string;
 		actionButtonBackgroundColor?: string;
 	}
+
 	let {
 		text = $bindable(''),
 		headerBgColor,
@@ -52,42 +53,48 @@
 </script>
 
 <div
-	class="overflow-hidden rounded-[1.25rem] border border-[#C5C5D3] {width}
+	class="w-full max-w-full overflow-hidden rounded-[1.25rem] border border-[#C5C5D3] {width}
             {headerBgColor}"
 >
-	<div class="flex items-center justify-between bg-[#ECEEF0] px-[1rem] py-[0.5rem]">
-		<div class="flex items-center gap-[0.25rem] font-bold">
-			<img src={headerImg} alt={headerImgAlt} class="h-[1.25rem] w-[1.25rem]" />
-			{header}
+	<div
+		class="flex flex-wrap items-center justify-between gap-2 bg-[#ECEEF0] px-3 py-2 sm:px-4 sm:py-2.5"
+	>
+		<div class="flex min-w-0 items-center gap-1.5 text-sm font-bold sm:text-base">
+			<img
+				src={headerImg}
+				alt={headerImgAlt}
+				class="h-4 w-4 shrink-0 object-contain sm:h-5 sm:w-5"
+			/>
+			<span class="truncate">{header}</span>
 		</div>
 
 		{#if topButton}
 			<button
-				class="flex cursor-pointer items-center
-                            gap-[0.25rem] text-[0.75rem] active:translate-y-[1px]"
+				class="flex shrink-0 cursor-pointer items-center
+                        gap-1 text-xs transition-opacity hover:opacity-80 active:translate-y-[1px]"
 				type="button"
 				onclick={onclickTopButton}
 			>
 				{#if topButtonImage}
-					<img src={topButtonImage} alt={topButtonAlt} class="h-4 w-4" />
+					<img src={topButtonImage} alt={topButtonAlt} class="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
 				{/if}
-				{topButtonText}
+				<span>{topButtonText}</span>
 			</button>
 		{/if}
 	</div>
 
 	<textarea
-		class="h-56 w-full resize-none border-0 p-4
-                    text-[0.875rem] font-medium text-[#333] outline-none
-                    placeholder:text-[#9A9AA8] focus:ring-0 focus:outline-none
-                    {textAreaBgColor}"
+		class="h-40 w-full resize-none border-0 p-3 text-xs font-medium
+                text-[#333] outline-none placeholder:text-[#9A9AA8] focus:ring-0 focus:outline-none
+                sm:h-56 sm:p-4 sm:text-sm
+                {textAreaBgColor}"
 		bind:value={text}
 		readonly={isReadOnly}
 		placeholder={textAreaPlaceholder}></textarea>
 
-	<div class="flex justify-end p-4">
-		{#if actionButton}
-			<button type="button" onclick={onclickActionButton}>
+	{#if actionButton}
+		<div class="flex justify-end p-3 sm:p-4">
+			<button type="button" onclick={onclickActionButton} class="w-full sm:w-auto">
 				<Button
 					svg={actionButtonImage ?? ''}
 					svgAlt={actionButtonAlt ?? ''}
@@ -97,6 +104,6 @@
 					background={actionButtonBackgroundColor ?? ''}
 				/>
 			</button>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>

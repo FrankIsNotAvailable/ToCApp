@@ -42,50 +42,66 @@
 </script>
 
 <div
-	class="relative flex w-full shrink-0 items-center gap-4 overflow-hidden
-    rounded-3xl bg-white/34 px-6 py-4
-    backdrop-blur-3xl transition-transform duration-200 ease-out hover:scale-[1.03]"
-	style="height: {height}px;"
+	class="relative flex w-full shrink-0 flex-col justify-between gap-4 overflow-hidden
+    rounded-2xl bg-white/34 p-4 backdrop-blur-3xl transition-transform
+    duration-200 ease-out hover:scale-[1.01] sm:flex-row sm:items-center sm:rounded-3xl
+    sm:p-6 sm:hover:scale-[1.03]"
+	style="min-height: {height}px;"
 	onclick={() => onClick(data.id)}
 	onkeydown={(e) => handleKeyDown(e, data.id)}
 	role="button"
 	tabindex="0"
 >
-	<div class="flex items-center gap-4">
-		<img src={folderImg} alt="" class="h-16 w-16 shrink-0 object-contain" />
-		<div class="h-16 w-px shrink-0 bg-black/25"></div>
-		<div class="flex flex-col gap-1">
-			<p class="font-masked-data text-[28px] leading-[1.2] font-normal text-black">
+	<div class="flex min-w-0 items-center gap-3 pr-0 sm:gap-4 sm:pr-24">
+		<img
+			src={folderImg}
+			alt=""
+			class="h-10 w-10 shrink-0 object-contain sm:h-14 sm:w-14 md:h-16 md:w-16"
+		/>
+
+		<div class="h-10 w-px shrink-0 bg-black/25 sm:h-14 md:h-16"></div>
+
+		<div class="flex min-w-0 flex-col gap-1">
+			<p
+				class="truncate font-masked-data text-lg leading-[1.2] font-normal text-black sm:text-2xl md:text-[28px]"
+			>
 				Data: {data.id}
 			</p>
 			<div class="flex flex-col">
-				<p class="font-masked-data text-[18px] leading-[1.2] font-normal text-[#767676]">
+				<p
+					class="font-masked-data text-xs leading-[1.2] font-normal text-[#767676] sm:text-base md:text-[18px]"
+				>
 					created: {formatDate(data.createdAt)}
 				</p>
-				<p class="font-masked-data text-[18px] leading-[1.2] font-normal text-[#767676]">
+				<p
+					class="font-masked-data text-xs leading-[1.2] font-normal text-[#767676] sm:text-base md:text-[18px]"
+				>
 					edited: {data.updatedAt ? formatDate(data.updatedAt) : '-'}
 				</p>
 			</div>
 		</div>
 	</div>
-	<div class="absolute right-6 bottom-4 flex items-center gap-3">
+
+	<div
+		class="flex items-center justify-end gap-2.5 self-end sm:absolute sm:right-6 sm:bottom-4 sm:gap-3 sm:self-auto"
+	>
 		<button
 			type="button"
 			aria-label="delete"
-			class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/[0.34]
-            shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] hover:bg-white/50"
+			class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/[0.34] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] transition-colors
+            hover:bg-white/50 sm:h-12 sm:w-12"
 			onclick={handleDelete}
 		>
-			<img src={removeImg} alt="remove" class="h-6 w-6 object-contain" />
+			<img src={removeImg} alt="remove" class="h-5 w-5 object-contain sm:h-6 sm:w-6" />
 		</button>
 		<button
 			type="button"
 			aria-label="edit"
-			class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/[0.34]
-            shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] hover:bg-white/50"
+			class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/[0.34] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] transition-colors
+            hover:bg-white/50 sm:h-12 sm:w-12"
 			onclick={handleEdit}
 		>
-			<img src={pen} alt="edit" class="h-6 w-6 object-contain" />
+			<img src={pen} alt="edit" class="h-5 w-5 object-contain sm:h-6 sm:w-6" />
 		</button>
 	</div>
 </div>

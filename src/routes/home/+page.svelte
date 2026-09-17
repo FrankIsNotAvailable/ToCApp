@@ -117,8 +117,8 @@
 	}
 </script>
 
-<div class="flex flex-col items-center">
-	<div class="w-full max-w-5xl px-4 py-6">
+<div class="flex min-h-screen flex-col items-center justify-start">
+	<div class="flex w-full max-w-5xl flex-1 flex-col px-4 py-4 sm:px-6 sm:py-8 md:px-8">
 		<DataList
 			items={displayedItems}
 			onEdit={handleEdit}
