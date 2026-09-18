@@ -20,7 +20,7 @@
 			linkTitle: gitBackendLink.title,
 			imageSrc: Github,
 			imageAlt: 'github logo',
-			imagePosition: 'right' as const
+			imagePosition: 'left' as const
 		},
 		{
 			title: 'Source code',
@@ -28,7 +28,7 @@
 			linkTitle: gitFrontendLink.title,
 			imageSrc: Github,
 			imageAlt: 'github logo',
-			imagePosition: 'right' as const
+			imagePosition: 'left' as const
 		}
 	];
 </script>
