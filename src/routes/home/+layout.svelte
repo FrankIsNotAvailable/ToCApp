@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Navbar from '$components/NavBar.svelte';
+	import Navbar from '$components/navigation/NavBar.svelte';
 	import { onMount, type Snippet } from 'svelte';
 	import { goto } from '$app/navigation';
 	import AuthService from '$services/auth.service';

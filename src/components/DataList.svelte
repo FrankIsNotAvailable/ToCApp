@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DataCard from './DataCard.svelte';
+	import DataCard from './cards/DataCard.svelte';
 	import plus from '$lib/assets/plus.svg';
 	import type { MaskingData } from '$appTypes/masking-data.type';
 	import Pagination from './Pagination.svelte';

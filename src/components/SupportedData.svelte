@@ -1,16 +1,23 @@
-<script>
-	export let picture = '';
-	export let pictureAlt = '';
-	export let title = '';
-	export let description = '';
-	export let pattern = '';
+<script lang="ts">
+	interface Props {
+		picture?: string;
+		pictureAlt?: string;
+		title?: string;
+		description?: string;
+		pattern?: string;
+	}
+
+	let {
+		picture = '',
+		pictureAlt = '',
+		title = '',
+		description = '',
+		pattern = ''
+	}: Props = $props();
 </script>
 
 <div
-	class="flex h-full w-full flex-col items-center justify-between
-            overflow-y-auto
-            rounded-[17px] p-6 text-center font-[family-name:var(--inter-font)] sm:p-8
-            lg:px-[4rem] lg:pt-[4rem] lg:pb-[1.5rem]"
+	class="flex h-full w-full flex-col items-center justify-between rounded-[17px] p-6 text-center font-[family-name:var(--inter-font)] sm:p-8 lg:px-[4rem] lg:pt-[4rem] lg:pb-[1.5rem]"
 >
 	<img
 		src={picture}
@@ -23,8 +30,7 @@
 	</div>
 
 	<div
-		class="max-w-md pt-2 text-center text-sm leading-normal text-[#656565] sm:text-base sm:leading-relaxed
-                lg:pt-[1rem] lg:text-[1.125rem] lg:leading-loose"
+		class="max-w-md pt-2 text-center text-sm leading-normal text-[#656565] sm:text-base sm:leading-relaxed lg:pt-[1rem] lg:text-[1.125rem] lg:leading-loose"
 	>
 		{description}
 	</div>

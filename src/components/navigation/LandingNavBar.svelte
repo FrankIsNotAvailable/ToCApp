@@ -1,11 +1,8 @@
 <div
-	class="z-1 flex w-full shrink-0 items-center justify-between gap-4 px-4
-            py-2 font-[family-name:var(--navbar-font)] sm:px-6 lg:px-8"
+	class="sticky top-0 z-50 flex w-full shrink-0 items-center justify-between gap-4 px-4
+            py-2 font-[family-name:var(--navbar-font)] sm:px-6 lg:px-8 bg-neurtal-100/20 backdrop-blur-md rounded-xl"
 >
-	<!-- Logo Title -->
 	<div class="shrink-0 text-xl font-normal tracking-tight sm:text-2xl lg:text-[3rem]">Obscura+</div>
-
-	<!-- Navigation Links Container -->
 	<div
 		class="nice-scrollbar flex items-center gap-3 overflow-x-auto
                 py-1 text-xs whitespace-nowrap sm:gap-6 sm:text-base lg:gap-[2.5rem] lg:text-[1.75rem]"

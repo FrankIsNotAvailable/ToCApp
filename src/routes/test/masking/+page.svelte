@@ -1,7 +1,7 @@
 <script lang="ts">
-	import NavBar from '$components/NavBar.svelte';
+	import NavBar from '$components/navigation/NavBar.svelte';
 	import BaseCard from '$layouts/BaseCard.svelte';
-	import TestMaskingDataCard from '$components/TestMaskingDataCard.svelte';
+	import TestMaskingDataCard from '$components/cards/TestMaskingDataCard.svelte';
 	import ActiveMaskingRules from '$components/ActiveMaskingRules.svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
 
