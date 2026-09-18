@@ -18,7 +18,10 @@
 	}: Props = $props();
 </script>
 
-<div
+<a
+	href={linkUrl}
+	target="_blank"
+	rel="noopener noreferrer"
 	class="group grid w-full grid-cols-1 items-center overflow-hidden rounded-[17px] border border-white/25 bg-[#D9D9D9]/20 p-6 shadow-[0px_4px_25px_0px_rgba(0,0,0,0.25)] sm:p-8 lg:w-auto lg:p-[3rem] lg:transition-[grid-template-columns] lg:duration-500 lg:ease-in-out {imagePosition ===
 	'left'
 		? 'lg:grid-cols-[auto_0fr] lg:hover:grid-cols-[auto_1fr]'
@@ -39,14 +42,11 @@
 			: 'order-2 lg:order-1 lg:mr-0 lg:items-end lg:text-right lg:group-hover:mr-[3rem]'}"
 	>
 		<div class="text-[2rem] sm:text-[2.5rem] lg:text-[3rem]">{title}</div>
-		<a
-			href={linkUrl}
-			target="_blank"
-			rel="noopener noreferrer"
+		<p
 			class="text-base break-all text-[#7B7B7B] underline active:translate-y-[1px] sm:text-xl lg:text-[2.5rem] lg:break-normal"
 		>
 			{linkTitle}
-		</a>
+		</p>
 	</div>
 
 	{#if imagePosition === 'right'}
@@ -56,4 +56,4 @@
 			class="order-1 mx-auto h-24 w-24 shrink-0 sm:h-32 sm:w-32 lg:order-2 lg:mx-0 lg:h-[10rem] lg:w-[10rem]"
 		/>
 	{/if}
-</div>
+</a>
