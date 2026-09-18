@@ -1,6 +1,6 @@
 <script lang="ts">
     import DataEntryLayout from '$layouts/DataEntryLayout.svelte';
-    import ActionDataCard from '$components/ActionDataCard.svelte';
+    import ActionDataCard from '$components/cards/ActionDataCard.svelte';
     import Eye from '$lib/assets/eye.svg';
     import CloseEye from '$lib/assets/close-eye.svg';
     import Protect from '$lib/assets/protect.svg';

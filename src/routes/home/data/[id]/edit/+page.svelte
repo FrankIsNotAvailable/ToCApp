@@ -1,6 +1,6 @@
 <script lang="ts">
 	import DataEntryLayout from '$layouts/DataEntryLayout.svelte';
-	import ActionDataCard from '$components/ActionDataCard.svelte';
+	import ActionDataCard from '$components/cards/ActionDataCard.svelte';
 	import Note from '$lib/assets/input.svg';
 	import Trash from '$lib/assets/remove.svg';
 	import { goto } from '$app/navigation';
