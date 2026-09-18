@@ -6,8 +6,8 @@
 	import SupportedDataSection from '$components/sections/SupportedDataSection.svelte';
 	import MoreInfoSection from '$components/sections/MoreInfoSection.svelte';
 
-	let scrollContainer: HTMLDivElement | undefined;
-	let aboutSection: HTMLDivElement | undefined;
+	let scrollContainer: HTMLDivElement | undefined = $state();
+	let aboutSection: HTMLDivElement | undefined = $state();
 
 	let progress = $state(0);
 	let arrowProgress = $state(0);
