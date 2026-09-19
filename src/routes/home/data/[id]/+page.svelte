@@ -5,6 +5,7 @@
 	import CloseEye from '$lib/assets/close-eye.svg';
 	import Protect from '$lib/assets/protect.svg';
 	import WhiteCopy from '$lib/assets/copywhite.svg';
+    import { cleanText } from '$utils/cleantext';
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import { useRawData } from '$hooks/useRawData';
 	import { page } from '$app/state';
@@ -66,9 +67,8 @@
 
 	async function handleCopyText() {
 		if (showData && showData.trim() !== '') {
-			// Strips entity tags (<CARD>...</CARD>) so clean text is written to clipboard
-			const cleanText = showData.replace(/<[A-Z_]+>(.*?)<\/[A-Z_]+>/g, '$1');
-			await navigator.clipboard.writeText(cleanText);
+			const cleanedText = cleanText(showData);
+			await navigator.clipboard.writeText(cleanedText);
 		}
 	}
 </script>

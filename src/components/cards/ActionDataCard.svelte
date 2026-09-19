@@ -159,7 +159,7 @@
 
 	{#if isReadOnly}
 		<div
-			class="h-48 w-full overflow-y-auto p-3 text-xs font-medium wrap-break-word whitespace-pre-wrap text-[#333] sm:h-64 sm:p-4 sm:text-sm lg:p-6 {textAreaBgColor}"
+			class="h-48 w-full overflow-y-auto p-6 text-xs font-medium wrap-break-word whitespace-pre-wrap text-[#333] sm:h-64 sm:text-sm {textAreaBgColor}"
 		>
 			{#if !text}
 				<span class="text-[#9A9AA8]">{textAreaPlaceholder}</span>
@@ -195,7 +195,7 @@
 		</div>
 	{:else}
 		<textarea
-			class="h-48 w-full resize-none border-0 p-3 text-xs font-medium text-[#333] outline-none placeholder:text-[#9A9AA8] focus:ring-0 focus:outline-none sm:h-64 sm:p-4 sm:text-sm lg:p-6 {textAreaBgColor}"
+			class="h-48 w-full resize-none border-0 p-6 text-xs font-medium text-[#333] outline-none placeholder:text-[#9A9AA8] focus:ring-0 focus:outline-none sm:h-64 sm:text-sm {textAreaBgColor}"
 			bind:value={text}
 			placeholder={textAreaPlaceholder}></textarea>
 	{/if}
