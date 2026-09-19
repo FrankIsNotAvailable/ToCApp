@@ -13,7 +13,8 @@
 
 	async function handleCopyText() {
 		if (maskedText && maskedText.trim() !== '') {
-			await navigator.clipboard.writeText(maskedText);
+			const cleanText = maskedText.replace(/<[A-Z_]+>(.*?)<\/[A-Z_]+>/g, '$1');
+			await navigator.clipboard.writeText(cleanText);
 		}
 	}
 
