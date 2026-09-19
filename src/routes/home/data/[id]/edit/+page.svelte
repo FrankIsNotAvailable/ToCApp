@@ -52,8 +52,8 @@
 		}
 		try {
 			await updateMaskingDataById(id, { data: rawText });
-            updateRawData(rawText);
-            goto(`/home/data/${id}`);
+			updateRawData(rawText);
+			goto(`/home/data/${id}`);
 		} catch (err) {
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
 		}
@@ -87,7 +87,7 @@
 			actionButtonAlt="Shield"
 			actionButtonBackgroundColor="bg-black"
 			actionButtonTextColor="text-white"
-			actionButtonBorderColor="border-black cursor-pointer hover:border-gray-200"
+			actionButtonBorderColor="border-black cursor-pointer hover:border-gray-800 hover:bg-gray-900 active:scale-95 active:bg-gray-800 transition-all duration-150 touch-manipulation"
 			onclickActionButton={handleUpdateMaskingData}
 		/>
 	{/if}
