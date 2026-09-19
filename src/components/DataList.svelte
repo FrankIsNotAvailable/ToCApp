@@ -43,7 +43,7 @@
 	}
 </script>
 
-<div class="mx-auto flex min-h-screen w-full max-w-4xl flex-col px-4 sm:px-6 lg:px-8">
+<div class="mx-auto flex flex-1 w-full max-w-4xl flex-col px-4 sm:px-6 lg:px-8">
 	<h1
 		class="my-6 shrink-0 text-center font-masked-data text-2xl leading-[1.2] font-normal text-black sm:my-8 sm:text-3xl md:my-10 md:text-[40px]"
 	>
