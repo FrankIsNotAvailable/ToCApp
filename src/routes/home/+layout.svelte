@@ -33,7 +33,7 @@
 		<p>Loading application...</p>
 	</div>
 {:else}
-	<div class="flex min-h-screen flex-col">
+	<div class="flex h-screen flex-col">
 		<Navbar />
 		{@render children()}
 	</div>
