@@ -117,7 +117,8 @@
 	}
 </script>
 
-<div class="flex flex-1 flex-col items-center w-full px-4 py-4 sm:px-6 sm:py-8 md:px-8">
+<div class="flex flex-1 flex-col items-center justify-start">
+	<div class="flex w-full max-w-5xl flex-1 flex-col px-4 py-4 sm:px-6 sm:py-8 md:px-8">
 		<DataList
 			items={displayedItems}
 			onEdit={handleEdit}
@@ -132,4 +133,5 @@
 			hasPrevPage={hasPrevUiPage}
 			hasNextPage={hasNextUiPage}
 		/>
+	</div>
 </div>

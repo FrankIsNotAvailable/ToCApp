@@ -32,7 +32,7 @@
 	<div
 		bind:this={scrollContainer}
 		onscroll={handleScroll}
-		class="relative h-0 flex-1"
+		class="nice-scrollbar relative h-0 flex-1 overflow-y-auto scroll-smooth"
 	>
 		<NavBar />
 		<HeroSection />
