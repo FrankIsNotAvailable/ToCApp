@@ -33,7 +33,7 @@
 		<p>Loading application...</p>
 	</div>
 {:else}
-	<div class="flex h-screen flex-col">
+	<div class="flex min-h-screen flex-col lg:h-screen nice-scrollbar overflow-y-auto scroll-smooth">
 		<Navbar />
 		{@render children()}
 	</div>
