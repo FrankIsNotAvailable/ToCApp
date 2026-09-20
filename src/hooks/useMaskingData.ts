@@ -1,13 +1,13 @@
 import { get } from 'svelte/store';
 import { maskingDataStore, isLoading, error, maskingData } from '$stores/masking-data.store';
 import { MaskingDataService } from '$services/masking-data.service';
-import type { MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$appTypes/masking-data.type';
+import type { CreateMaskingDataResponse, MaskingData, MaskingDataResponse, UpdateMaskingDataPayload } from '$appTypes/masking-data.type';
 
 export function useMaskingData() {
     const fetchMaskingDataList = async (
         page: number = 1,
         pageSize: number = 20,
-        orderBy?: 'ASC' | 'DESC',
+        orderBy: 'ASC' | 'DESC' = 'ASC',
         forceRefresh: boolean = false
     ): Promise<MaskingDataResponse | null> => {
         const cachedData = get(maskingDataStore).data;
@@ -151,6 +151,29 @@ export function useMaskingData() {
         }
     };
 
+    const createMaskingData = async (data: string): Promise<CreateMaskingDataResponse | null> => {
+        try {
+            maskingDataStore.setLoading(true);
+            maskingDataStore.setError(null);
+
+            const newMaskingData = await MaskingDataService.createMaskingData(data);
+
+            if (newMaskingData) {
+                maskingDataStore.updateMaskingDataById(newMaskingData.data.id, newMaskingData.data);
+            }
+
+            return newMaskingData;
+        } catch (err) {
+            console.error(`Error creating masking data:`, err);
+            maskingDataStore.setError(
+                err instanceof Error ? err.message : 'Failed to create masking data'
+            );
+            return null;
+        } finally {
+            maskingDataStore.setLoading(false);
+        }
+    };
+
     const clearMaskingDataList = () => {
         maskingDataStore.clearMaskingData();
     };
@@ -169,6 +192,7 @@ export function useMaskingData() {
         deleteMaskingData,
         refreshMaskingDataList,
         updateMaskingDataById,
+        createMaskingData,
 
         updateMaskingDataList,
         clearMaskingDataList,

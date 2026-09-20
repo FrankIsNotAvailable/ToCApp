@@ -24,3 +24,8 @@ export interface MaskingDataResponse {
   data: MaskingData[];
   meta: Meta;
 }
+
+export interface CreateMaskingDataResponse {
+  data: MaskingData;
+  message: string;
+}
