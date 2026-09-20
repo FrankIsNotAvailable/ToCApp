@@ -4,6 +4,7 @@
 	import TestMaskingDataCard from '$components/cards/TestMaskingDataCard.svelte';
 	import ActiveMaskingRules from '$components/ActiveMaskingRules.svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
+	import { cleanText } from '$utils/cleantext';
 
 	const { maskDataForGuest } = useMaskingData();
 
@@ -13,7 +14,8 @@
 
 	async function handleCopyText() {
 		if (maskedText && maskedText.trim() !== '') {
-			await navigator.clipboard.writeText(maskedText);
+			const cleanedText = cleanText(maskedText);
+			await navigator.clipboard.writeText(cleanedText);
 		}
 	}
 
