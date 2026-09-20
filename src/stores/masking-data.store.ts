@@ -28,6 +28,7 @@ function createMaskingDataStore() {
 
             const existingIndex = currentState.data.data.findIndex((m) => m.id === id);
             let updatedList = [...currentState.data.data];
+            let updatedMeta = { ...currentState.data.meta };
 
             if (existingIndex !== -1) {
                 updatedList[existingIndex] = {
@@ -35,12 +36,28 @@ function createMaskingDataStore() {
                     ...updates
                 };
             } else {
-                updatedList = [updates as MaskingData, ...updatedList];
+                const newItem: MaskingData = {
+                    id,
+                    user: updates.user ?? ({} as MaskingData['user']),
+                    maskedData: updates.maskedData ?? '',
+                    createdAt: updates.createdAt ?? new Date().toISOString(),
+                    status: updates.status ?? 'ACTIVE',
+                    ...updates
+                };
+
+                updatedList = [newItem, ...updatedList];
+
+                const newTotal = (updatedMeta.total ?? 0) + 1;
+                updatedMeta = {
+                    ...updatedMeta,
+                    total: newTotal
+                };
             }
 
             baseStore.setData({
                 ...currentState.data,
-                data: updatedList
+                data: updatedList,
+                meta: updatedMeta
             });
         }
     };
