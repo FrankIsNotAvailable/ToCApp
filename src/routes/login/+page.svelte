@@ -46,6 +46,10 @@
 	<div
 		class="w-full max-w-xl space-y-6 rounded-xl border border-[#F6F4E9]/60 bg-[#F6F4E9]/20 p-6 shadow-lg backdrop-blur-xl sm:space-y-8 sm:p-8 lg:p-12"
 	>
+		<a href="/" class="flex text-xs text-[#3C4043] hover:underline">
+			<img src={Back} alt="Back" class="my-auto mr-1 inline-block h-3 w-3" />
+			<p class="my-auto">Back to landing</p>
+		</a>
 		<div class="text-center">
 			<h2
 				class="font-(family-name:--navbar-font) text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl"
@@ -104,17 +108,10 @@
 			</button>
 			<a
 				href="/test/masking"
-				class="text-center text-sm text-[#3C4043] underline hover:text-[#333333] sm:text-md"
+				class="sm:text-md text-center text-sm text-[#3C4043] underline hover:text-[#333333]"
 			>
 				Continue as a guest
 			</a>
 		</div>
-		<a
-			href="/"
-			class="text-xs text-[#3C4043] hover:underline mt-2 flex"
-		>
-			<img src={Back} alt="Back" class="inline-block h-3 w-3 mr-1 my-auto" />
-			<p class="my-auto">Back to landing</p>
-		</a>
 	</div>
 </div>
