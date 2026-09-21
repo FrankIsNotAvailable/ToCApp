@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { authStore } from '$stores/auth.store';
 	import Back from '$lib/assets/previous.svg';
@@ -39,7 +38,7 @@
 	});
 
 	function handleGoogleLogin() {
-		goto(BACKEND_LOGIN_URL);
+		window.location.href = BACKEND_LOGIN_URL;
 	}
 </script>
 
