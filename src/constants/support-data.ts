@@ -39,6 +39,6 @@ export const supportedCards: CardData[] = [
         pictureAlt: 'pin picture',
         title: 'Address',
         description: 'A physical address containing location and postal details.',
-        pattern: 'เลขที่บ้าน ซอย (optional) ถนน แขวงหรือตำบล เขตหรืออำเภอ จังหวัด รหัสไปรษนีย์'
+        pattern: '123/45 ซอยสุขุมวิท 24 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110'
     }
 ];

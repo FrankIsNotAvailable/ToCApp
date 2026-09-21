@@ -35,7 +35,7 @@
 		{description}
 	</div>
 
-	<div class="pt-4 text-sm break-all sm:text-base lg:pt-[2rem] lg:text-[1.5rem]">
+	<div class="pt-4 text-sm break-words sm:text-base lg:pt-[2rem] lg:text-[1.5rem]">
 		Pattern: {pattern}
 	</div>
 </div>

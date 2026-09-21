@@ -1,4 +1,4 @@
-<div
+<div id="landingNav"
 	class="sticky top-0 z-50 flex w-full shrink-0 items-center justify-between gap-4 px-4
             py-2 font-[family-name:var(--navbar-font)] sm:px-6 lg:px-8 bg-neurtal-100/20 backdrop-blur-md rounded-xl"
 >

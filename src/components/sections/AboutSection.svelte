@@ -14,10 +14,10 @@
 
 <div
 	bind:this={aboutSectionElement}
-	class="grid min-h-screen w-full grid-cols-1 gap-6 px-5 py-12 sm:px-8 lg:grid-cols-3 lg:grid-rows-3 lg:gap-0 lg:px-0 lg:py-0"
+	class="grid min-h-[calc(100vh-var(--navbar-height))] w-full grid-cols-1 gap-6 px-5 pt-4 pb-6 sm:px-8 lg:grid-cols-3 lg:grid-rows-3 lg:gap-0 lg:px-0 lg:py-4"
 	id="about-us"
 >
-	<div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:pt-12 lg:pl-[clamp(2rem,8vw,7rem)]">
+	<div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:pl-[clamp(2rem,8vw,7rem)]">
 		<div
 			class="font-[family-name:var(--navbar-font)] text-[clamp(3.5rem,10vw,10rem)] leading-none"
 			style={`transform: translateX(${progress * 100 - 100}%)`}

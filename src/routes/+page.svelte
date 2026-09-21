@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import NavBar from '$components/navigation/LandingNavBar.svelte';
 	import HeroSection from '$components/sections/HeroSection.svelte';
 	import AboutSection from '$components/sections/AboutSection.svelte';
@@ -26,15 +27,39 @@
 		const arrowEnd = sectionTop + scrollContainer.clientHeight;
 		arrowProgress = Math.min(1, Math.max(0, (scrollTop - arrowStart) / (arrowEnd - arrowStart)));
 	}
+
+	let navHeight = $state(0);
+
+	onMount(() => {
+		const navbar = document.getElementById('landingNav');
+		if (!navbar) return;
+
+		const updateHeight = () => {
+			navHeight = navbar.offsetHeight;
+			document.documentElement.style.setProperty('--navbar-height', `${navHeight}px`);
+		};
+
+		updateHeight();
+
+		const observer = new ResizeObserver(() => {
+			updateHeight();
+		});
+
+		observer.observe(navbar);
+
+		return () => {
+			observer.disconnect();
+		};
+	});
 </script>
 
 <div class="flex h-screen flex-col font-[family-name:var(--inter-font)]">
+	<NavBar />
 	<div
 		bind:this={scrollContainer}
 		onscroll={handleScroll}
 		class="nice-scrollbar relative h-0 flex-1 overflow-y-auto scroll-smooth"
 	>
-		<NavBar />
 		<HeroSection />
 		<AboutSection bind:aboutSectionElement={aboutSection} {progress} {arrowProgress} />
 		<FeaturesSection />

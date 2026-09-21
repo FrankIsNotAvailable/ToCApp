@@ -19,9 +19,9 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="relative flex min-h-screen items-center justify-center overflow-hidden">
+<div class="relative flex min-h-[calc(100vh-var(--navbar-height))] items-center justify-center overflow-hidden">
 	<div
-		class="relative -translate-y-[3rem] cursor-none px-4 text-center font-[family-name:var(--navbar-font)] text-[clamp(4rem,15vw,12.5rem)] leading-none sm:-translate-y-[4rem] md:-translate-y-[6rem]"
+		class="relative -translate-y-[3rem] cursor-none px-4 text-center font-[family-name:var(--navbar-font)] text-[clamp(4rem,15vw,12.5rem)] leading-none"
 		onmousemove={handleCursorMove}
 		onmouseenter={handleCursorEnter}
 		onmouseleave={handleCursorLeave}
