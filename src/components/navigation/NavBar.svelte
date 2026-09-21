@@ -44,11 +44,14 @@
             shadow-[0px_4px_20px_0px_rgba(0,0,0,0.2)] backdrop-blur-[5px]
             sm:px-6 md:py-3"
 >
-	<div class="navBarTitle shrink-0 text-lg font-normal tracking-tight sm:text-2xl lg:text-[3rem]">
-		Obscura+
-	</div>
-
 	<AuthGuard requireAuth={true}>
+		<a
+			href="/home"
+			class="navBarTitle shrink-0 text-lg font-normal tracking-tight sm:text-2xl lg:text-[3rem]"
+		>
+			Obscura+
+		</a>
+
 		<div
 			class="navBarButtons flex items-center justify-end gap-2 font-[family-name:var(--inter-font)]
                    text-xs sm:gap-4 sm:text-sm md:text-base lg:text-[1.25rem]"
@@ -73,9 +76,9 @@
 
 				{#if showMenu}
 					<button
-						class="absolute top-full w-24 lg:w-28 right-0 z-50 mt-2 flex cursor-pointer items-center gap-2 rounded-lg
-		                border border-gray-100 bg-white px-3 py-2 whitespace-nowrap shadow-[0_4px_12px_0_rgba(0,0,0,0.15)]
-		                transition-colors hover:bg-gray-100 sm:px-4"
+						class="absolute top-full right-0 z-50 mt-2 flex w-24 cursor-pointer items-center gap-2 rounded-lg border
+		                border-gray-100 bg-white px-3 py-2 whitespace-nowrap shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] transition-colors
+		                hover:bg-gray-100 sm:px-4 lg:w-28"
 						onclick={handleLogout}
 					>
 						<img src={logout} alt="logout" class="h-4 w-4 sm:h-5 sm:w-5" />
@@ -86,6 +89,12 @@
 		</div>
 
 		{#snippet fallback()}
+			<a
+				href="/"
+				class="navBarTitle shrink-0 text-lg font-normal tracking-tight sm:text-2xl lg:text-[3rem]"
+			>
+				Obscura+
+			</a>
 			<div
 				class="navBarButtons flex items-center justify-end gap-2 font-[family-name:var(--inter-font)]
                        text-xs sm:gap-4 sm:text-sm md:text-base lg:text-[1.25rem]"
