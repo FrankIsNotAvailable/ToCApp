@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	// import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { authStore } from '$stores/auth.store';
+	import Back from '$lib/assets/previous.svg';
 
 	let errorMessage = '';
 
@@ -46,6 +46,10 @@
 	<div
 		class="w-full max-w-xl space-y-6 rounded-xl border border-[#F6F4E9]/60 bg-[#F6F4E9]/20 p-6 shadow-lg backdrop-blur-xl sm:space-y-8 sm:p-8 lg:p-12"
 	>
+		<a href="/" class="flex text-xs text-[#3C4043] hover:underline">
+			<img src={Back} alt="Back" class="my-auto mr-1 inline-block h-3 w-3" />
+			<p class="my-auto">Back to landing</p>
+		</a>
 		<div class="text-center">
 			<h2
 				class="font-(family-name:--navbar-font) text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl"
@@ -79,7 +83,7 @@
 		<div class="mt-6 flex flex-col items-center gap-3 sm:mt-8 sm:gap-4">
 			<button
 				type="button"
-				on:click={handleGoogleLogin}
+				onclick={handleGoogleLogin}
 				class="inline-flex w-full items-center justify-center gap-3 rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm transition-all duration-150 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none sm:w-auto sm:px-8 sm:text-base"
 			>
 				<svg class="h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" viewBox="0 0 24 24">
@@ -104,7 +108,7 @@
 			</button>
 			<a
 				href="/test/masking"
-				class="text-center text-xs text-[#3C4043] underline hover:text-[#333333] sm:text-sm"
+				class="sm:text-md text-center text-sm text-[#3C4043] underline hover:text-[#333333]"
 			>
 				Continue as a guest
 			</a>
