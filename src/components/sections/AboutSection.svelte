@@ -17,7 +17,7 @@
 	class="grid min-h-screen w-full grid-cols-1 gap-6 px-5 py-12 sm:px-8 lg:grid-cols-3 lg:grid-rows-3 lg:gap-0 lg:px-0 lg:py-0"
 	id="about-us"
 >
-	<div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:pt-12 lg:pl-[clamp(2rem,8vw,7rem)]">
+	<div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:pt-12 lg:pl-[clamp(2rem,8vw,7rem)] mt-2 lg:mt-4">
 		<div
 			class="font-[family-name:var(--navbar-font)] text-[clamp(3.5rem,10vw,10rem)] leading-none"
 			style={`transform: translateX(${progress * 100 - 100}%)`}
@@ -34,7 +34,7 @@
 	<img
 		src={KeyArt}
 		alt="key art"
-		class="mx-auto h-68 max-h-200 w-full max-w-lg object-contain p-6 lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:h-full lg:max-w-none lg:p-12"
+		class="mx-auto h-68 max-h-200 w-full max-w-lg object-contain p-6 lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:h-full lg:max-w-none lg:p-12 mt-2 lg:mt-4"
 	/>
 
 	<img
