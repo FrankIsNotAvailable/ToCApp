@@ -3,26 +3,26 @@
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import { onMount } from 'svelte';
 	import type { MaskingData } from '$appTypes/masking-data.type';
-	import type { Meta } from '$appTypes/meta-data.type';
 	import { goto } from '$app/navigation';
 
-	const { fetchMaskingDataList, deleteMaskingData } = useMaskingData();
+	const { fetchMaskingDataList, deleteMaskingData, store } = useMaskingData();
 
 	const displayPageSize = 10;
 	const backendBatchSize = 40;
 	const pagesPerBatch = backendBatchSize / displayPageSize;
 
-	let rawBatchItems = $state<MaskingData[]>([]);
-	let meta = $state<Meta | null>(null);
 	let isLoading = $state(true);
 	let error = $state<string | null>(null);
-
 	let activeUiPage = $state(1);
-
 	let loadedBackendPage = $state<number | null>(null);
 
-	let totalUiPages = $derived(meta?.total ? Math.ceil(meta.total / displayPageSize) : 1);
+	let storeData = $derived($store.data);
+	let rawBatchItems = $derived<MaskingData[]>(storeData?.data ?? []);
+	let backendMeta = $derived(storeData?.meta ?? null);
 
+	let totalUiPages = $derived(
+		backendMeta?.total ? Math.ceil(backendMeta.total / displayPageSize) : 1
+	);
 	let hasPrevUiPage = $derived(activeUiPage > 1);
 	let hasNextUiPage = $derived(activeUiPage < totalUiPages);
 
@@ -48,8 +48,6 @@
 				);
 
 				if (response) {
-					rawBatchItems = response.data || [];
-					meta = response.meta || null;
 					loadedBackendPage = requiredBackendPage;
 				}
 			} catch (err) {
@@ -84,12 +82,6 @@
 		try {
 			await deleteMaskingData(id);
 
-			rawBatchItems = rawBatchItems.filter((item) => item.id !== id);
-
-			if (meta) {
-				meta = { ...meta, total: Math.max(0, meta.total - 1) };
-			}
-
 			const relativePageIndex = (activeUiPage - 1) % pagesPerBatch;
 			const start = relativePageIndex * displayPageSize;
 			const currentSlice = rawBatchItems.slice(start, start + displayPageSize);
@@ -117,7 +109,7 @@
 	}
 </script>
 
-<div class="flex min-h-screen flex-col items-center justify-start">
+<div class="flex flex-1 flex-col items-center justify-start">
 	<div class="flex w-full max-w-5xl flex-1 flex-col px-4 py-4 sm:px-6 sm:py-8 md:px-8">
 		<DataList
 			items={displayedItems}
