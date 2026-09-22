@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div class="flex h-screen flex-col font-[family-name:var(--inter-font)]">
+<main class="flex h-screen flex-col font-[family-name:var(--inter-font)]">
 	<div
 		bind:this={scrollContainer}
 		onscroll={handleScroll}
@@ -41,4 +41,4 @@
 		<SupportedDataSection />
 		<MoreInfoSection />
 	</div>
-</div>
+</main>

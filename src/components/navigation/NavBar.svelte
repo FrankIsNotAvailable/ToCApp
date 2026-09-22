@@ -37,7 +37,7 @@
 
 <svelte:window onclick={closeMenu} />
 
-<div
+<nav
 	class="navBar sticky top-0 z-40 flex w-full shrink-0 items-center justify-between
             border-b border-white/35 bg-[var(--navbar-background)]/20
             px-3 py-2 font-[family-name:var(--navbar-font)]
@@ -111,4 +111,4 @@
 			</div>
 		{/snippet}
 	</AuthGuard>
-</div>
+</nav>
