@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Navbar from '$components/NavBar.svelte';
+	import Navbar from '$components/navigation/NavBar.svelte';
 	import { onMount, type Snippet } from 'svelte';
 	import { goto } from '$app/navigation';
 	import AuthService from '$services/auth.service';
@@ -33,7 +33,7 @@
 		<p>Loading application...</p>
 	</div>
 {:else}
-	<div class="flex min-h-screen flex-col">
+	<div class="flex min-h-screen flex-col lg:h-screen nice-scrollbar overflow-y-auto scroll-smooth">
 		<Navbar />
 		{@render children()}
 	</div>
