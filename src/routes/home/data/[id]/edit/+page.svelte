@@ -10,6 +10,8 @@
 	import { onMount } from 'svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
 
+	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
+
 	const { updateMaskingDataById, isLoading: isMaskingDataLoading } = useMaskingData();
 	const { fetchRawDataById, isLoading: isRawdataLoading, updateRawData } = useRawData();
 
@@ -17,6 +19,9 @@
 
 	let errorMsg = $state<string | null>(null);
 	let rawText = $state<string | null>(null);
+
+	let showPopup = $state<boolean>(false);
+    let popupStatus = $state<'editing_data' | 'done_editing_data'>('editing_data');
 
 	function clearError() {
 		errorMsg = null;
@@ -51,11 +56,17 @@
 			return;
 		}
 		try {
+			popupStatus = 'editing_data';
+            showPopup = true;
 			await updateMaskingDataById(id, { data: rawText });
 			updateRawData(rawText);
-			goto(`/home/data/${id}`);
+			popupStatus = 'done_editing_data';
+			setTimeout(() => {
+                goto(`/home/data/${id}`);
+            }, 1500);
 		} catch (err) {
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
+			showPopup = false;
 		}
 	}
 </script>
@@ -92,3 +103,4 @@
 		/>
 	{/if}
 </DataEntryLayout>
+<LoadingMaskingpopup bind:isVisible={showPopup} status={popupStatus} />
