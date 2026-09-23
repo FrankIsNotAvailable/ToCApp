@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import type { MaskingData } from '$appTypes/masking-data.type';
 	import { goto } from '$app/navigation';
+	import DeletionPopup from '$components/Deletion.svelte';
 
 	const { fetchMaskingDataList, deleteMaskingData, store } = useMaskingData();
 
@@ -15,6 +16,11 @@
 	let error = $state<string | null>(null);
 	let activeUiPage = $state(1);
 	let loadedBackendPage = $state<number | null>(null);
+
+	let deletePopupOpen = $state(false);
+    let deleteStage = $state<'confirm' | 'processing' | 'success'>('confirm');
+    let targetDeleteId = $state<string | null>(null);
+    let targetDeleteLabel = $state<string>('');
 
 	let storeData = $derived($store.data);
 	let rawBatchItems = $derived<MaskingData[]>(storeData?.data ?? []);
@@ -75,30 +81,50 @@
 		goto(`/home/data/${id}/edit`);
 	}
 
-	async function handleDelete(id: string) {
-		const confirmed = confirm('Are you sure you want to delete this item?');
-		if (!confirmed) return;
+    function handleDelete(id: string) {
+        const item = rawBatchItems.find(i => i.id === id);
+        
+        targetDeleteId = id;
+        targetDeleteLabel = (item as any)?.title || (item as any)?.name || `Data ID: ${id.substring(0, 5)}...`; 
+        
+        deleteStage = 'confirm';
+        deletePopupOpen = true;
+    }
 
-		try {
-			await deleteMaskingData(id);
+    async function executeDelete() {
+        if (!targetDeleteId) return;
 
-			const relativePageIndex = (activeUiPage - 1) % pagesPerBatch;
-			const start = relativePageIndex * displayPageSize;
-			const currentSlice = rawBatchItems.slice(start, start + displayPageSize);
+        deleteStage = 'processing';
 
-			if (currentSlice.length === 0) {
-				if (hasPrevUiPage) {
-					goToPage(activeUiPage - 1);
-				} else {
-					await loadDataForUiPage(activeUiPage, true);
-				}
-			} else if (currentSlice.length < displayPageSize && activeUiPage < totalUiPages) {
-				loadDataForUiPage(activeUiPage, true);
-			}
-		} catch (err) {
-			error = err instanceof Error ? err.message : 'Failed to delete item';
-		}
-	}
+        try {
+            await deleteMaskingData(targetDeleteId);
+
+            const relativePageIndex = (activeUiPage - 1) % pagesPerBatch;
+            const start = relativePageIndex * displayPageSize;
+            const currentSlice = rawBatchItems.slice(start, start + displayPageSize);
+
+            if (currentSlice.length === 0) {
+                if (hasPrevUiPage) {
+                    goToPage(activeUiPage - 1);
+                } else {
+                    await loadDataForUiPage(activeUiPage, true);
+                }
+            } else if (currentSlice.length < displayPageSize && activeUiPage < totalUiPages) {
+                loadDataForUiPage(activeUiPage, true);
+            }
+
+            deleteStage = 'success';
+        } catch (err) {
+            error = err instanceof Error ? err.message : 'Failed to delete item';
+            deletePopupOpen = false;
+        }
+    }
+
+
+    function closePopup() {
+        deletePopupOpen = false;
+        targetDeleteId = null;
+    }
 
 	function handleError() {
 		loadDataForUiPage(activeUiPage, true);
@@ -127,3 +153,11 @@
 		/>
 	</div>
 </div>
+<DeletionPopup
+    bind:open={deletePopupOpen}
+    bind:stage={deleteStage}
+    itemLabel={targetDeleteLabel}
+    onCancel={closePopup}
+    onConfirm={executeDelete}
+    onClose={closePopup}
+/>

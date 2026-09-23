@@ -3,10 +3,9 @@
 	import successImg from '$lib/assets/success.png';
 
 	let {
-		open = false,
-		//mock up itemlabel data 01
+		open = $bindable(false),
 		itemLabel = 'Data 01',
-		stage = 'confirm',
+		stage = $bindable('confirm'),
 		onCancel,
 		onConfirm,
 		onClose
@@ -21,7 +20,7 @@
 </script>
 
 {#if open}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/25 p-4 backdrop-blur-[15px]">
+	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-[15px]">
 		{#if stage === 'processing'}
 			<div
 				class="flex w-[448px] h-[330px] max-w-md flex-col items-center gap-5 
