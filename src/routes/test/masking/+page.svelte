@@ -14,12 +14,14 @@
 	let isLoading = $state<boolean>(false);
 
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<'masking_text' 
-	| 'done_masking_text' 
-	| 'masking_data' 
-	| 'done_masking_data' 
-	| 'editing_data' 
-	| 'done_editing_data'>('masking_text');	
+    let popupStatus = $state<
+        | 'maskingText' 
+        | 'doneMaskingText' 
+        | 'maskingData' 
+        | 'doneMaskingData' 
+        | 'editingData' 
+        | 'doneEditingData'
+    >('maskingText');
 
 	async function handleCopyText() {
 		if (maskedText && maskedText.trim() !== '') {
@@ -35,13 +37,13 @@
 		}
 		try {
 			isLoading = true;
-			popupStatus = 'masking_text';
+			popupStatus = 'maskingText';
             showPopup = true;
 			const result = await maskDataForGuest(rawText);
 			if (result && result.maskedText) {
 				maskedText = result.maskedText;
 			}
-			popupStatus = 'done_masking_text';
+			popupStatus = 'doneMaskingText';
 		} catch (error) {
 			console.error('Error masking data:', error);
 			showPopup = false;

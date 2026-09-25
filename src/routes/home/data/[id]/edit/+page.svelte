@@ -9,7 +9,6 @@
 	import { useRawData } from '$hooks/useRawData';
 	import { onMount } from 'svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
-
 	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
 
 	const { updateMaskingDataById, isLoading: isMaskingDataLoading } = useMaskingData();
@@ -21,7 +20,7 @@
 	let rawText = $state<string | null>(null);
 
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<'editing_data' | 'done_editing_data'>('editing_data');
+    let popupStatus = $state<'editingData' | 'doneEditingData'>('editingData');
 
 	function clearError() {
 		errorMsg = null;
@@ -56,11 +55,11 @@
 			return;
 		}
 		try {
-			popupStatus = 'editing_data';
+			popupStatus = 'editingData';
             showPopup = true;
 			await updateMaskingDataById(id, { data: rawText });
 			updateRawData(rawText);
-			popupStatus = 'done_editing_data';
+			popupStatus = 'doneEditingData';
 			setTimeout(() => {
                 goto(`/home/data/${id}`);
             }, 1500);

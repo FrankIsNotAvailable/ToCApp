@@ -3,45 +3,53 @@
     import { onDestroy } from 'svelte';
     import successImg from '$lib/assets/correct.png';
 
-    export let isVisible = false;
-    
-    export let status: 
-        | 'masking_text' 
-        | 'done_masking_text' 
-        | 'masking_data' 
-        | 'done_masking_data' 
-        | 'editing_data' 
-        | 'done_editing_data' = 'masking_data';
+    interface Props {
+        isVisible?: boolean;
+        status?: 
+            | 'maskingText' 
+            | 'doneMaskingText' 
+            | 'maskingData' 
+            | 'doneMaskingData' 
+            | 'editingData' 
+            | 'doneEditingData';
+    }
+    let {
+        isVisible = $bindable(false),
+        status = 'maskingData'
+    }: Props = $props();
 
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
+    let isSuccess = $derived(status.startsWith('done'));
 
-    $: isSuccess = status.startsWith('done_');
-
-    $: if (isVisible && isSuccess) {
-        if (timeoutId) clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            isVisible = false;
-        }, 3000);
-    }
+    $effect(() => {
+            if (isVisible && isSuccess) {
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    isVisible = false;
+                }, 3000);
+            }
+        });
+    $effect(() => {
+        if (!isVisible && timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = undefined;
+        }
+    });
 
     onDestroy(() => {
         if (timeoutId) clearTimeout(timeoutId);
     });
 
-    $: if (!isVisible && timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = undefined;
-    }
 
     function getDisplayText(currentStatus: string) {
         switch (currentStatus) {
-            case 'masking_text': return 'masking text';
-            case 'done_masking_text': return 'done masking text';
-            case 'masking_data': return 'masking data';
-            case 'done_masking_data': return 'done masking data';
-            case 'editing_data': return 'editing data';
-            case 'done_editing_data': return 'done editing data';
+            case 'maskingText': return 'masking text';
+            case 'doneMaskingText': return 'done masking text';
+            case 'maskingData': return 'masking data';
+            case 'doneMaskingData': return 'done masking data';
+            case 'editingData': return 'editing data';
+            case 'doneEditingData': return 'done editing data';
             default: return '';
         }
     }

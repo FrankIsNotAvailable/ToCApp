@@ -22,7 +22,7 @@
 
 	let rawText = $state<string>('');
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<'masking_data' | 'done_masking_data'>('masking_data');
+    let popupStatus = $state<'maskingData' | 'doneMaskingData'>('maskingData');
 
 	async function handleCreateData() {
 		if (!rawText || rawText.trim() === '') {
@@ -30,7 +30,7 @@
 		}
 		clearError();
 		try {
-			popupStatus = 'masking_data';
+			popupStatus = 'maskingData';
 			showPopup = true;
 			const newMaskingData = await createMaskingData(rawText);
 			if (!newMaskingData || !newMaskingData.data || !newMaskingData.data.id) {
@@ -38,7 +38,7 @@
 				showPopup = false;
 				return;
 			}
-			popupStatus = 'done_masking_data';
+			popupStatus = 'doneMaskingData';
 			setTimeout(() => {
                 goto(`/home/data/${newMaskingData.data.id}`);
             }, 1500);
