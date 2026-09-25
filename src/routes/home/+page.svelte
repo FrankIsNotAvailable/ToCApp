@@ -71,11 +71,11 @@
 		loadDataForUiPage(1);
 	});
 
-	function goToPage(targetPage: number) {
-		if (targetPage >= 1 && targetPage <= totalUiPages && targetPage !== activeUiPage) {
-			loadDataForUiPage(targetPage);
-		}
-	}
+	async function goToPage(targetPage: number) {
+        if (targetPage >= 1 && targetPage <= totalUiPages && targetPage !== activeUiPage) {
+            await loadDataForUiPage(targetPage); 
+        }
+    }
 
 	function handleEdit(id: string) {
 		goto(`/home/data/${id}/edit`);
@@ -83,19 +83,21 @@
 
     function handleDelete(id: string) {
         const item = rawBatchItems.find(i => i.id === id);
-        
         targetDeleteId = id;
-        targetDeleteLabel = (item as any)?.title || (item as any)?.name || `Data ID: ${id.substring(0, 5)}...`; 
+
+        const idText = String(id);
+        targetDeleteLabel = (item as any)?.title || (item as any)?.name || `Data ID: ${idText.slice(0, 5)}...`;
         
         deleteStage = 'confirm';
         deletePopupOpen = true;
     }
 
     async function executeDelete() {
+        if (deleteStage === 'processing') return; 
         if (!targetDeleteId) return;
 
+		error = null; 
         deleteStage = 'processing';
-
         try {
             await deleteMaskingData(targetDeleteId);
 
@@ -105,18 +107,19 @@
 
             if (currentSlice.length === 0) {
                 if (hasPrevUiPage) {
-                    goToPage(activeUiPage - 1);
+                    await goToPage(activeUiPage - 1);
                 } else {
                     await loadDataForUiPage(activeUiPage, true);
                 }
             } else if (currentSlice.length < displayPageSize && activeUiPage < totalUiPages) {
-                loadDataForUiPage(activeUiPage, true);
+                await loadDataForUiPage(activeUiPage, true);
             }
 
             deleteStage = 'success';
         } catch (err) {
-            error = err instanceof Error ? err.message : 'Failed to delete item';
-            deletePopupOpen = false;
+            console.error(err); 
+            error = 'Failed to delete item'; 
+            closePopup();
         }
     }
 
@@ -124,6 +127,8 @@
     function closePopup() {
         deletePopupOpen = false;
         targetDeleteId = null;
+		targetDeleteLabel = '';
+		deleteStage = 'confirm';
     }
 
 	function handleError() {
