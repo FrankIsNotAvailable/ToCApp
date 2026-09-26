@@ -6,6 +6,7 @@
 	import WhiteProtect from '$lib/assets/protectwhite.svg';
 	import { goto } from '$app/navigation';
 	import { useMaskingData } from '$hooks/useMaskingData';
+	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
 
 	const { createMaskingData, isLoading: isMaskingDataLoading } = useMaskingData();
 
@@ -20,6 +21,8 @@
 	}
 
 	let rawText = $state<string>('');
+	let showPopup = $state<boolean>(false);
+    let popupStatus = $state<'maskingData' | 'doneMaskingData'>('maskingData');
 
 	async function handleCreateData() {
 		if (!rawText || rawText.trim() === '') {
@@ -27,14 +30,21 @@
 		}
 		clearError();
 		try {
+			popupStatus = 'maskingData';
+			showPopup = true;
 			const newMaskingData = await createMaskingData(rawText);
 			if (!newMaskingData || !newMaskingData.data || !newMaskingData.data.id) {
 				errorMsg = 'Failed to create masked data';
+				showPopup = false;
 				return;
 			}
-			goto(`/home/data/${newMaskingData.data.id}`);
+			popupStatus = 'doneMaskingData';
+			setTimeout(() => {
+                goto(`/home/data/${newMaskingData.data.id}`);
+            }, 1500);
 		} catch (err) {
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
+			showPopup = false;
 		}
 	}
 </script>
@@ -65,3 +75,4 @@
 		onclickActionButton={handleCreateData}
 	/>
 </DataEntryLayout>
+<LoadingMaskingpopup bind:isVisible={showPopup} status={popupStatus} />

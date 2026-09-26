@@ -5,12 +5,23 @@
 	import ActiveMaskingRules from '$components/ActiveMaskingRules.svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import { cleanText } from '$utils/cleantext';
+	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
 
 	const { maskDataForGuest } = useMaskingData();
 
 	let rawText = $state<string>('');
 	let maskedText = $state<string>('');
 	let isLoading = $state<boolean>(false);
+
+	let showPopup = $state<boolean>(false);
+    let popupStatus = $state<
+        | 'maskingText' 
+        | 'doneMaskingText' 
+        | 'maskingData' 
+        | 'doneMaskingData' 
+        | 'editingData' 
+        | 'doneEditingData'
+    >('maskingText');
 
 	async function handleCopyText() {
 		if (maskedText && maskedText.trim() !== '') {
@@ -26,12 +37,16 @@
 		}
 		try {
 			isLoading = true;
+			popupStatus = 'maskingText';
+            showPopup = true;
 			const result = await maskDataForGuest(rawText);
 			if (result && result.maskedText) {
 				maskedText = result.maskedText;
 			}
+			popupStatus = 'doneMaskingText';
 		} catch (error) {
 			console.error('Error masking data:', error);
+			showPopup = false;
 		} finally {
 			isLoading = false;
 		}
@@ -70,4 +85,5 @@
 			</div>
 		</BaseCard>
 	</main>
+	<LoadingMaskingpopup bind:isVisible={showPopup} status={popupStatus} />
 </div>
