@@ -7,8 +7,17 @@
 	import { goto } from '$app/navigation';
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
+	import { get } from 'svelte/store';
 
-	const { createMaskingData, isLoading: isMaskingDataLoading } = useMaskingData();
+	type StatusType =
+		| 'maskingText'
+		| 'doneMaskingText'
+		| 'maskingData'
+		| 'doneMaskingData'
+		| 'editingData'
+		| 'doneEditingData';
+
+	const { createMaskingData, isLoading: isMaskingDataLoading, error } = useMaskingData();
 
 	let errorMsg = $state<string | null>(null);
 
@@ -22,7 +31,7 @@
 
 	let rawText = $state<string>('');
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<'maskingData' | 'doneMaskingData'>('maskingData');
+	let popupStatus = $state<StatusType>('maskingData');
 
 	async function handleCreateData() {
 		if (!rawText || rawText.trim() === '') {
@@ -32,17 +41,24 @@
 		try {
 			popupStatus = 'maskingData';
 			showPopup = true;
-			const newMaskingData = await createMaskingData(rawText);
+
+			const [newMaskingData] = await Promise.all([
+				createMaskingData(rawText),
+				new Promise((resolve) => setTimeout(resolve, 500))
+			]);
+
 			if (!newMaskingData || !newMaskingData.data || !newMaskingData.data.id) {
-				errorMsg = 'Failed to create masked data';
-				showPopup = false;
-				return;
+				const storeError = get(error);
+				throw new Error(storeError || 'Failed to create masked data');
 			}
+
 			popupStatus = 'doneMaskingData';
+
 			setTimeout(() => {
-                goto(`/home/data/${newMaskingData.data.id}`);
-            }, 1500);
+				goto(`/home/data/${newMaskingData.data.id}`);
+			}, 500);
 		} catch (err) {
+			console.error('Error creating masking data:', err);
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
 			showPopup = false;
 		}
