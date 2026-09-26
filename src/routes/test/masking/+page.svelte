@@ -6,22 +6,24 @@
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import { cleanText } from '$utils/cleantext';
 	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
+	import { get } from 'svelte/store';
 
-	const { maskDataForGuest } = useMaskingData();
+	type StatusType =
+		| 'maskingText'
+		| 'doneMaskingText'
+		| 'maskingData'
+		| 'doneMaskingData'
+		| 'editingData'
+		| 'doneEditingData';
+
+	const { maskDataForGuest, error } = useMaskingData();
 
 	let rawText = $state<string>('');
 	let maskedText = $state<string>('');
 	let isLoading = $state<boolean>(false);
 
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<
-        | 'maskingText' 
-        | 'doneMaskingText' 
-        | 'maskingData' 
-        | 'doneMaskingData' 
-        | 'editingData' 
-        | 'doneEditingData'
-    >('maskingText');
+	let popupStatus = $state<StatusType>('maskingText');
 
 	async function handleCopyText() {
 		if (maskedText && maskedText.trim() !== '') {
@@ -38,12 +40,22 @@
 		try {
 			isLoading = true;
 			popupStatus = 'maskingText';
-            showPopup = true;
-			const result = await maskDataForGuest(rawText);
+			showPopup = true;
+
+			const [result] = await Promise.all([
+				maskDataForGuest(rawText),
+				new Promise((resolve) => setTimeout(resolve, 500))
+			]);
+
+			if (!result) {
+				const errorMessage = get(error) || 'No result returned from maskDataForGuest';
+				throw new Error(errorMessage);
+			}
+
 			if (result && result.maskedText) {
 				maskedText = result.maskedText;
+				popupStatus = 'doneMaskingText';
 			}
-			popupStatus = 'doneMaskingText';
 		} catch (error) {
 			console.error('Error masking data:', error);
 			showPopup = false;

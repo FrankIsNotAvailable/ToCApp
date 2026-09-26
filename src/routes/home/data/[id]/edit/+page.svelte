@@ -10,9 +10,27 @@
 	import { onMount } from 'svelte';
 	import { useMaskingData } from '$hooks/useMaskingData';
 	import LoadingMaskingpopup from '$components/LoadingMaskingpopup.svelte';
+	import { get } from 'svelte/store';
 
-	const { updateMaskingDataById, isLoading: isMaskingDataLoading } = useMaskingData();
-	const { fetchRawDataById, isLoading: isRawdataLoading, updateRawData } = useRawData();
+	type StatusType =
+		| 'maskingText'
+		| 'doneMaskingText'
+		| 'maskingData'
+		| 'doneMaskingData'
+		| 'editingData'
+		| 'doneEditingData';
+
+	const {
+		updateMaskingDataById,
+		isLoading: isMaskingDataLoading,
+		error: maskingError
+	} = useMaskingData();
+	const {
+		fetchRawDataById,
+		isLoading: isRawdataLoading,
+		updateRawData,
+		error: rawError
+	} = useRawData();
 
 	const id = $derived(page.params.id);
 
@@ -20,7 +38,7 @@
 	let rawText = $state<string | null>(null);
 
 	let showPopup = $state<boolean>(false);
-    let popupStatus = $state<'editingData' | 'doneEditingData'>('editingData');
+	let popupStatus = $state<StatusType>('editingData');
 
 	function clearError() {
 		errorMsg = null;
@@ -32,11 +50,13 @@
 			try {
 				const data = await fetchRawDataById(id);
 				if (!data) {
-					errorMsg = 'Failed to load data';
+					const storeError = get(rawError);
+					errorMsg = storeError || 'Failed to load data';
 				} else {
 					rawText = data.encData;
 				}
 			} catch (err) {
+				console.error('Error fetching raw data:', err);
 				errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
 			}
 		}
@@ -54,16 +74,29 @@
 			errorMsg = 'Invalid data';
 			return;
 		}
+
 		try {
 			popupStatus = 'editingData';
-            showPopup = true;
-			await updateMaskingDataById(id, { data: rawText });
+			showPopup = true;
+
+			const [updatedData] = await Promise.all([
+				updateMaskingDataById(id, { data: rawText }),
+				new Promise((resolve) => setTimeout(resolve, 500))
+			]);
+
+			if (!updatedData) {
+				const storeError = get(maskingError);
+				throw new Error(storeError || 'Failed to update masking data');
+			}
+
 			updateRawData(rawText);
 			popupStatus = 'doneEditingData';
+
 			setTimeout(() => {
-                goto(`/home/data/${id}`);
-            }, 1500);
+				goto(`/home/data/${id}`);
+			}, 500);
 		} catch (err) {
+			console.error('Error updating masking data:', err);
 			errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred';
 			showPopup = false;
 		}
