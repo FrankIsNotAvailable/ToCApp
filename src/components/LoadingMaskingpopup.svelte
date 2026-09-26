@@ -41,7 +41,7 @@
 
 {#if isVisible}
 	<div
-		class="fixed top-30 right-6 z-50 flex items-center rounded-xl border border-white/80 bg-[#FFFFFF]/40 px-6 py-5 shadow-[0_8px_20px_rgba(0,0,0,0.08)]"
+		class="fixed top-30 right-6 z-50 flex items-center rounded-xl border border-white/80 bg-[#FFFFFF] px-6 py-5 shadow-[0_8px_20px_rgba(0,0,0,0.08)]"
 		in:fly={{ x: 50, duration: 300 }}
 		out:fade={{ duration: 180 }}
 	>
