@@ -1,7 +1,7 @@
 import type { Info } from '$appTypes/info.type';
 
 export const youtubeLink: Info = {
-    url: 'https://youtu.be/zZ6vybT1HQs?si=O0ATxlbuREHQxKmb',
+    url: 'https://youtu.be/t7JqZQ0C5EQ?si=Gm9F3joi8-hOss2r',
     title: 'Watch the demo video here',
 };
 export const gitBackendLink: Info = {
