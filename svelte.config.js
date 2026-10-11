@@ -26,12 +26,13 @@ const config = {
 			$layouts: './src/layouts',
 			$config: './src/config',
 			$services: './src/services',
-			$types: './src/types',
+			$appTypes: './src/types',
 			$utils: './src/utils',
 			$enums: './src/enums',
 			$hooks: './src/hooks',
 			$stores: './src/stores',
-			$validation: './src/validation'
+			$validation: './src/validation',
+			$guards: './src/guards',
 		}
 	}
 };

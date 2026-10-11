@@ -1,0 +1,23 @@
+name: toc-app-prod
+
+services:
+  frontend:
+    build:
+      context: .
+      target: production
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        - VITE_APP_TITLE=${VITE_APP_TITLE}
+    restart: unless-stopped
+    
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    env_file:
+      - .env
+    depends_on:
+      - frontend
